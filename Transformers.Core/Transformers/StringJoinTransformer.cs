@@ -9,13 +9,18 @@ namespace Transformers.Core.Transformers
     [Transformer(name: "str_join", requiresConfig: true)]
     public class StringJoinTransformer : IJTokenTransformer
     {
+        static StringJoinTransformer()
+        {
+            TransformerFactory.RegisterTransformer<StringToStringLookupTransformer>();
+        }
+
         public string SourceType => "string";
 
         public string TargetType => "string";
 
         private readonly Config _config;
 
-        private readonly List<IJTokenTransformer> _sources = new List<IJTokenTransformer>();
+        private readonly List<IJTokenTransformer> _sources = new();
 
         public StringJoinTransformer(JObject conf)
         {
@@ -37,12 +42,12 @@ namespace Transformers.Core.Transformers
             // TODO: validate at least 1 source
             var values = _sources.Select(x => Extensions.Value<string>(x.Transform(root)));
 
-            return string.Join(_config.Seperator, values);
+            return string.Join(_config.Separator, values);
         }
 
-        public class Config
+        private class Config
         {
-            public string Seperator { get; set; }
+            public string Separator { get; set; }
         }
     }
 }

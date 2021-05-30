@@ -7,6 +7,11 @@ namespace Transformers.Core.Transformers
     [Transformer(name: "valueof", requiresConfig: true)]
     public class ValueOfTransformer : IJTokenTransformer
     {
+        static ValueOfTransformer()
+        {
+            TransformerFactory.RegisterTransformer<ValueOfTransformer>();
+        }
+
         public string SourceType => "any";
 
         public string TargetType => "any";

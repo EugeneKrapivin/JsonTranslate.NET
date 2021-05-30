@@ -6,21 +6,10 @@ namespace Transformers.Core.JsonDSL
 {
     public class JsonDslSerializer : ISerializeDSL
     {
-        public string ToString(Instruction instruction)
-        {
-            return JsonConvert.SerializeObject(instruction);
-        }
+        public string ToString(Instruction instruction) 
+            => JsonConvert.SerializeObject(instruction);
 
-        public Instruction Parse(string source)
-        {
-            try
-            {
-                return JsonConvert.DeserializeObject<Instruction>(source);
-            }
-            catch (Exception ex) // todo capture actual deser fail exception
-            {
-                throw new Exception("fuck you thats ain't json");
-            }
-        }
+        public Instruction Parse(string source) 
+            => JsonConvert.DeserializeObject<Instruction>(source);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Transformers.Core.Abstractions
 {
-    public class TransformerAttribute : Attribute
+    public sealed class TransformerAttribute : Attribute
     {
         public bool RequiresConfig { get; private set; }
 

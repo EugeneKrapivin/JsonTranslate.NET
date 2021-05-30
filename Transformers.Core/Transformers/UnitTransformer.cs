@@ -7,6 +7,11 @@ namespace Transformers.Core.Transformers
     [Transformer(name: "unit", requiresConfig: true)]
     public class UnitTransformer : IJTokenTransformer
     {
+        static UnitTransformer()
+        {
+            TransformerFactory.RegisterTransformer<UnitTransformer>();
+        }
+
         public string SourceType => "any";
 
         public string TargetType => "any";

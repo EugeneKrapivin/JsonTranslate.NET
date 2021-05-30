@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Transformers.Core.Abstractions\Transformers.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Transformers.Core\Transformers.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

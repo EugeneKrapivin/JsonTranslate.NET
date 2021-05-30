@@ -13,7 +13,7 @@ namespace Transformers.Core.Abstractions
 
         public ISerializeDSL SerializeDsl { get; set; }
 
-        public IJTokenTransformer BuildTransformationTree(TransformerFactory factory)
+        public IJTokenTransformer BuildTransformationTree(ITransformerFactory factory)
         {
             var root = factory.GetTransformer(Name, Config);
 

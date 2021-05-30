@@ -9,6 +9,11 @@ namespace Transformers.Core.Transformers
     [Transformer(name: "s_lookup_s", requiresConfig: true)]
     public class StringToStringLookupTransformer : IJTokenTransformer
     {
+        static StringToStringLookupTransformer()
+        {
+            TransformerFactory.RegisterTransformer<StringToStringLookupTransformer>();
+        }
+        
         public string SourceType => "string";
 
         public string TargetType => "string";

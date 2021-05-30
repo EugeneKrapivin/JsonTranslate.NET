@@ -3,30 +3,31 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Transformers.Core;
 using Transformers.Core.Abstractions;
 using Transformers.Core.JustDSL;
 using Transformers.Core.Transformers;
 
 namespace TranformerDSLParser
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             var just = new JustDslSerializer();
             var instructions = just.Parse(
-@"#str_join({""seperator"":"" ""}, 
+@"#str_join({""separator"":"" ""}, 
     #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, 
         #valueof({""path"":""$.test""})), 
     #unit({""value"":""fuck you""}))");
 
-			var transformerFactory = CreateTransformerFactory();
+			var transformerFactory = new TransformerFactory();
 
             var transformerChain = instructions.BuildTransformationTree(transformerFactory);
 
             var template = new JObject
             {
-                ["me"] = @"#str_join({""seperator"":"" ""}, #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""fuck you""}))"
+                ["me"] = @"#str_join({""separator"":"" ""}, #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""fuck you""}))"
 			};
 			/*
 			 * {
@@ -51,12 +52,5 @@ namespace TranformerDSLParser
             Console.WriteLine(template.ToString(Formatting.Indented));
 
         }
-
-        private static TransformerFactory CreateTransformerFactory() =>
-            new TransformerFactory()
-                .RegisterTransformer<ValueOfTransformer>()
-                .RegisterTransformer<StringToStringLookupTransformer>()
-                .RegisterTransformer<StringJoinTransformer>()
-                .RegisterTransformer<UnitTransformer>();
     }
 }
