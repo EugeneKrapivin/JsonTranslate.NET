@@ -49,7 +49,7 @@ namespace Transformers.Core
                 throw new ArgumentException($"{type.Name} should implement {nameof(IJTokenTransformer)} and ");
 
             var attr = GetTransformerAttribute(type);
-            if (attr != null)
+            if (attr == null)
                 throw new ArgumentException(
                     $"type {type.Name} must be decorated with an attribute of type {nameof(TransformerAttribute)}");
 
@@ -58,7 +58,7 @@ namespace Transformers.Core
 
         private static bool ImplementsInterface(TypeInfo type)
         {
-            return !typeof(IJTokenTransformer).IsAssignableFrom(type);
+            return typeof(IJTokenTransformer).IsAssignableFrom(type);
         }
 
         private static TransformerAttribute GetTransformerAttribute(Type type)
