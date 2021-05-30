@@ -2,9 +2,8 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using Newtonsoft.Json.Linq;
-using TranformerDSLParser.Core;
 
-namespace TranformerDSLParser.Transformers
+namespace Transformers.Core.Abstractions
 {
     public class TransformerFactory
     {
@@ -13,7 +12,7 @@ namespace TranformerDSLParser.Transformers
         public TransformerFactory RegisterTransformer<T>()
         {
             var type = typeof(T);
-            if (!type.IsAssignableTo(typeof(IJTokenTransformer)))
+            if (!typeof(IJTokenTransformer).IsAssignableFrom(type))
                 throw new ArgumentException($"{type.Name} should implement {nameof(IJTokenTransformer)} and ");
 
             var decorator = GetDecorator<T>();
@@ -24,20 +23,7 @@ namespace TranformerDSLParser.Transformers
 
             return this;
         }
-
-        public static void SelfRegisterTransformer<T>()
-        {
-            var type = typeof(T);
-            if (!type.IsAssignableTo(typeof(IJTokenTransformer)))
-                throw new ArgumentException($"{type.Name} should implement {nameof(IJTokenTransformer)} and ");
-
-            var decorator = GetDecorator<T>();
-
-            if (decorator == null) throw new ArgumentException($"type {typeof(T).Name} must be decorated with an attribute of type {nameof(TransformerAttribute)}");
-
-            _transformers.TryAdd(decorator.Name, (typeof(T), decorator));
-        }
-
+        
         public IJTokenTransformer GetTransformer(string name, JObject conf = null)
         {
             if (!_transformers.TryGetValue(name, out var value))

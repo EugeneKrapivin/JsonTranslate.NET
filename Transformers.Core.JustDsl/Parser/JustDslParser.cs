@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\TranformerDSLParser\TransformerDSL.g4 by ANTLR 4.9.2
+// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\Transformers.Core.JustDsl\JustDsl.g4 by ANTLR 4.9.2
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace TransformerDSL.Parser {
+namespace Transformers.Core.JustDSL.Parser {
 using System;
 using System.IO;
 using System.Text;
@@ -33,7 +33,7 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.9.2")]
 [System.CLSCompliant(false)]
-public partial class TransformerDSLParser : Parser {
+public partial class JustDslParser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
@@ -66,38 +66,38 @@ public partial class TransformerDSLParser : Parser {
 		}
 	}
 
-	public override string GrammarFileName { get { return "TransformerDSL.g4"; } }
+	public override string GrammarFileName { get { return "JustDsl.g4"; } }
 
 	public override string[] RuleNames { get { return ruleNames; } }
 
 	public override string SerializedAtn { get { return new string(_serializedATN); } }
 
-	static TransformerDSLParser() {
+	static JustDslParser() {
 		decisionToDFA = new DFA[_ATN.NumberOfDecisions];
 		for (int i = 0; i < _ATN.NumberOfDecisions; i++) {
 			decisionToDFA[i] = new DFA(_ATN.GetDecisionState(i), i);
 		}
 	}
 
-		public TransformerDSLParser(ITokenStream input) : this(input, Console.Out, Console.Error) { }
+		public JustDslParser(ITokenStream input) : this(input, Console.Out, Console.Error) { }
 
-		public TransformerDSLParser(ITokenStream input, TextWriter output, TextWriter errorOutput)
+		public JustDslParser(ITokenStream input, TextWriter output, TextWriter errorOutput)
 		: base(input, output, errorOutput)
 	{
 		Interpreter = new ParserATNSimulator(this, _ATN, decisionToDFA, sharedContextCache);
 	}
 
 	public partial class FuncContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode FUNCTION_START() { return GetToken(TransformerDSLParser.FUNCTION_START, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(TransformerDSLParser.IDENTIFIER, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPAREN() { return GetToken(TransformerDSLParser.LPAREN, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RPAREN() { return GetToken(TransformerDSLParser.RPAREN, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode FUNCTION_START() { return GetToken(JustDslParser.FUNCTION_START, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(JustDslParser.IDENTIFIER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPAREN() { return GetToken(JustDslParser.LPAREN, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RPAREN() { return GetToken(JustDslParser.RPAREN, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public JsonContext json() {
 			return GetRuleContext<JsonContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(TransformerDSLParser.ARG_SEPERATOR); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(JustDslParser.ARG_SEPERATOR); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ARG_SEPERATOR(int i) {
-			return GetToken(TransformerDSLParser.ARG_SEPERATOR, i);
+			return GetToken(JustDslParser.ARG_SEPERATOR, i);
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public FuncContext[] func() {
 			return GetRuleContexts<FuncContext>();
@@ -111,18 +111,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_func; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterFunc(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitFunc(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitFunc(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -193,18 +183,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_json; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterJson(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitJson(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitJson(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -239,9 +219,9 @@ public partial class TransformerDSLParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public PairContext pair(int i) {
 			return GetRuleContext<PairContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(TransformerDSLParser.ARG_SEPERATOR); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(JustDslParser.ARG_SEPERATOR); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ARG_SEPERATOR(int i) {
-			return GetToken(TransformerDSLParser.ARG_SEPERATOR, i);
+			return GetToken(JustDslParser.ARG_SEPERATOR, i);
 		}
 		public ObjContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -249,18 +229,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_obj; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterObj(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitObj(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitObj(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -325,7 +295,7 @@ public partial class TransformerDSLParser : Parser {
 	}
 
 	public partial class PairContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STRING() { return GetToken(TransformerDSLParser.STRING, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STRING() { return GetToken(JustDslParser.STRING, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ValueContext value() {
 			return GetRuleContext<ValueContext>(0);
 		}
@@ -335,18 +305,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_pair; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterPair(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitPair(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitPair(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -385,9 +345,9 @@ public partial class TransformerDSLParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ValueContext value(int i) {
 			return GetRuleContext<ValueContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(TransformerDSLParser.ARG_SEPERATOR); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] ARG_SEPERATOR() { return GetTokens(JustDslParser.ARG_SEPERATOR); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ARG_SEPERATOR(int i) {
-			return GetToken(TransformerDSLParser.ARG_SEPERATOR, i);
+			return GetToken(JustDslParser.ARG_SEPERATOR, i);
 		}
 		public ArrContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -395,18 +355,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_arr; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterArr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitArr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitArr(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -471,8 +421,8 @@ public partial class TransformerDSLParser : Parser {
 	}
 
 	public partial class ValueContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STRING() { return GetToken(TransformerDSLParser.STRING, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NUMBER() { return GetToken(TransformerDSLParser.NUMBER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STRING() { return GetToken(JustDslParser.STRING, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NUMBER() { return GetToken(JustDslParser.NUMBER, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ObjContext obj() {
 			return GetRuleContext<ObjContext>(0);
 		}
@@ -485,18 +435,8 @@ public partial class TransformerDSLParser : Parser {
 		}
 		public override int RuleIndex { get { return RULE_value; } }
 		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.EnterValue(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ITransformerDSLListener typedListener = listener as ITransformerDSLListener;
-			if (typedListener != null) typedListener.ExitValue(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ITransformerDSLVisitor<TResult> typedVisitor = visitor as ITransformerDSLVisitor<TResult>;
+			IJustDslVisitor<TResult> typedVisitor = visitor as IJustDslVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitValue(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -644,4 +584,4 @@ public partial class TransformerDSLParser : Parser {
 
 
 }
-} // namespace TransformerDSL.Parser
+} // namespace Transformers.Core.JustDSL.Parser

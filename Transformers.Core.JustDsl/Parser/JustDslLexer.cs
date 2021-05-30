@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\TranformerDSLParser\TransformerDSL.g4 by ANTLR 4.9.2
+// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\Transformers.Core.JustDsl\JustDsl.g4 by ANTLR 4.9.2
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace TransformerDSL.Parser {
+namespace Transformers.Core.JustDSL.Parser {
 using System;
 using System.IO;
 using System.Text;
@@ -30,7 +30,7 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.9.2")]
 [System.CLSCompliant(false)]
-public partial class TransformerDSLLexer : Lexer {
+public partial class JustDslLexer : Lexer {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
@@ -52,10 +52,10 @@ public partial class TransformerDSLLexer : Lexer {
 	};
 
 
-	public TransformerDSLLexer(ICharStream input)
+	public JustDslLexer(ICharStream input)
 	: this(input, Console.Out, Console.Error) { }
 
-	public TransformerDSLLexer(ICharStream input, TextWriter output, TextWriter errorOutput)
+	public JustDslLexer(ICharStream input, TextWriter output, TextWriter errorOutput)
 	: base(input, output, errorOutput)
 	{
 		Interpreter = new LexerATNSimulator(this, _ATN, decisionToDFA, sharedContextCache);
@@ -80,7 +80,7 @@ public partial class TransformerDSLLexer : Lexer {
 		}
 	}
 
-	public override string GrammarFileName { get { return "TransformerDSL.g4"; } }
+	public override string GrammarFileName { get { return "JustDsl.g4"; } }
 
 	public override string[] RuleNames { get { return ruleNames; } }
 
@@ -90,7 +90,7 @@ public partial class TransformerDSLLexer : Lexer {
 
 	public override string SerializedAtn { get { return new string(_serializedATN); } }
 
-	static TransformerDSLLexer() {
+	static JustDslLexer() {
 		decisionToDFA = new DFA[_ATN.NumberOfDecisions];
 		for (int i = 0; i < _ATN.NumberOfDecisions; i++) {
 			decisionToDFA[i] = new DFA(_ATN.GetDecisionState(i), i);
@@ -233,4 +233,4 @@ public partial class TransformerDSLLexer : Lexer {
 
 
 }
-} // namespace TransformerDSL.Parser
+} // namespace Transformers.Core.JustDSL.Parser

@@ -6,17 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.2" />
-    <PackageReference Include="Antlr4BuildTasks" Version="8.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <Antlr4 Include="TransformerDSL.g4">
-      <Package>TransformerDSL.Parser</Package>
-      <Visitor>true</Visitor>
-      <Error>false</Error>
-      <Listener>true</Listener>
-      <AntOutDir>MyLib.Parser</AntOutDir>
-    </Antlr4>
+    <ProjectReference Include="..\Transformers.Core.Abstractions\Transformers.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Transformers.Core.JustDsl\Transformers.Core.JustDSL.csproj" />
+    <ProjectReference Include="..\Transformers.Core\Transformers.Core.csproj" />
   </ItemGroup>
+
 </Project>

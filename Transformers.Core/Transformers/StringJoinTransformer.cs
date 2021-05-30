@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using TranformerDSLParser.Core;
+using Transformers.Core.Abstractions;
 
-namespace TranformerDSLParser.Transformers
+namespace Transformers.Core.Transformers
 {
     [Transformer(name: "str_join", requiresConfig: true)]
     public class StringJoinTransformer : IJTokenTransformer
@@ -15,13 +15,13 @@ namespace TranformerDSLParser.Transformers
 
         private readonly Config _config;
 
-        private readonly List<IJTokenTransformer> _sources = new();
+        private readonly List<IJTokenTransformer> _sources = new List<IJTokenTransformer>();
 
         public StringJoinTransformer(JObject conf)
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = IJTokenTransformer.GetConfig<Config>(conf);
+            _config = this.GetConfig<Config>(conf);
         }
 
         public IJTokenTransformer Bind(params IJTokenTransformer[] sources)

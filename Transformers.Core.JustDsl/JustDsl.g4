@@ -1,4 +1,4 @@
-﻿grammar TransformerDSL;
+﻿grammar JustDsl;
 
 LPAREN:             '(';
 RPAREN:             ')';

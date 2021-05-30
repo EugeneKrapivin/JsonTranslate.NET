@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using TranformerDSLParser.Core;
+using Transformers.Core.Abstractions;
 
-namespace TranformerDSLParser.Transformers
+namespace Transformers.Core.Transformers
 {
     [Transformer(name: "s_lookup_s", requiresConfig: true)]
     public class StringToStringLookupTransformer : IJTokenTransformer
@@ -19,7 +19,7 @@ namespace TranformerDSLParser.Transformers
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = IJTokenTransformer.GetConfig<Config>(conf);
+            _config = this.GetConfig<Config>(conf);
         }
 
         private IJTokenTransformer _source;

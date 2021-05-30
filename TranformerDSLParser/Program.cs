@@ -3,8 +3,9 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TranformerDSLParser.Core;
-using TranformerDSLParser.Transformers;
+using Transformers.Core.Abstractions;
+using Transformers.Core.JustDSL;
+using Transformers.Core.Transformers;
 
 namespace TranformerDSLParser
 {
@@ -12,7 +13,8 @@ namespace TranformerDSLParser
     {
         static void Main(string[] args)
         {
-            var instructions = Instruction.Parse(
+            var just = new JustDslSerializer();
+            var instructions = just.Parse(
 @"#str_join({""seperator"":"" ""}, 
     #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, 
         #valueof({""path"":""$.test""})), 
@@ -41,7 +43,7 @@ namespace TranformerDSLParser
 
 			foreach (var s in p)
             {
-                var t = Instruction.Parse(s.Value.Value<string>());
+                var t = just.Parse(s.Value.Value<string>());
 
                 s.Value = t.BuildTransformationTree(transformerFactory).Transform(source);
             }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\TranformerDSLParser\TransformerDSL.g4 by ANTLR 4.9.2
+// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\Transformers.Core.JustDsl\JustDsl.g4 by ANTLR 4.9.2
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,14 +19,14 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace TransformerDSL.Parser {
+namespace Transformers.Core.JustDSL.Parser {
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using IToken = Antlr4.Runtime.IToken;
 using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
-/// This class provides an empty implementation of <see cref="ITransformerDSLVisitor{Result}"/>,
+/// This class provides an empty implementation of <see cref="IJustDslVisitor{Result}"/>,
 /// which can be extended to create a visitor which only needs to handle a subset
 /// of the available methods.
 /// </summary>
@@ -34,9 +34,9 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.9.2")]
 [System.Diagnostics.DebuggerNonUserCode]
 [System.CLSCompliant(false)]
-public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, ITransformerDSLVisitor<Result> {
+public partial class JustDslBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, IJustDslVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.func"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.func"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -44,9 +44,9 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitFunc([NotNull] TransformerDSLParser.FuncContext context) { return VisitChildren(context); }
+	public virtual Result VisitFunc([NotNull] JustDslParser.FuncContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.json"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.json"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -54,9 +54,9 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitJson([NotNull] TransformerDSLParser.JsonContext context) { return VisitChildren(context); }
+	public virtual Result VisitJson([NotNull] JustDslParser.JsonContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.obj"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.obj"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -64,9 +64,9 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitObj([NotNull] TransformerDSLParser.ObjContext context) { return VisitChildren(context); }
+	public virtual Result VisitObj([NotNull] JustDslParser.ObjContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.pair"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.pair"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -74,9 +74,9 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitPair([NotNull] TransformerDSLParser.PairContext context) { return VisitChildren(context); }
+	public virtual Result VisitPair([NotNull] JustDslParser.PairContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.arr"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.arr"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -84,9 +84,9 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitArr([NotNull] TransformerDSLParser.ArrContext context) { return VisitChildren(context); }
+	public virtual Result VisitArr([NotNull] JustDslParser.ArrContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TransformerDSLParser.value"/>.
+	/// Visit a parse tree produced by <see cref="JustDslParser.value"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -94,6 +94,6 @@ public partial class TransformerDSLBaseVisitor<Result> : AbstractParseTreeVisito
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitValue([NotNull] TransformerDSLParser.ValueContext context) { return VisitChildren(context); }
+	public virtual Result VisitValue([NotNull] JustDslParser.ValueContext context) { return VisitChildren(context); }
 }
-} // namespace TransformerDSL.Parser
+} // namespace Transformers.Core.JustDSL.Parser

@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Newtonsoft.Json.Linq;
-using TransformerDSL.Parser;
+using Transformers.Core.Abstractions;
+using Transformers.Core.JustDSL.Parser;
 
-namespace TranformerDSLParser.Core
+namespace Transformers.Core.JustDSL
 {
-    public class DslVisitor : TransformerDSLBaseVisitor<Instruction>
+    public class DslVisitor : JustDslBaseVisitor<Instruction>
     {
-        public override Instruction VisitFunc(TransformerDSLParser.FuncContext context)
+        public override Instruction VisitFunc(JustDslParser.FuncContext context)
         {
             var name = context.IDENTIFIER().GetText();
             var conf = context.json().GetText();

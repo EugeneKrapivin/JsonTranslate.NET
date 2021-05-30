@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TranformerDSLParser.Core
+namespace Transformers.Core.Abstractions
 {
     public class TransformerAttribute : Attribute
     {

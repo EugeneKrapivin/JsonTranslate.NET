@@ -1,8 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using TranformerDSLParser.Core;
+using Transformers.Core.Abstractions;
 
-namespace TranformerDSLParser.Transformers
+namespace Transformers.Core.Transformers
 {
     [Transformer(name: "unit", requiresConfig: true)]
     public class UnitTransformer : IJTokenTransformer
@@ -17,7 +17,7 @@ namespace TranformerDSLParser.Transformers
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = IJTokenTransformer.GetConfig<Config>(conf);
+            _config = this.GetConfig<Config>(conf);
         }
 
         public IJTokenTransformer Bind(params IJTokenTransformer[] source)

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 
-namespace TranformerDSLParser.Core
+namespace Transformers.Core
 {
     public class JTokenPathOperations
     {
@@ -10,7 +10,7 @@ namespace TranformerDSLParser.Core
             if (root == null) throw new ArgumentNullException(nameof(root));
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
-            var segmentNames = path.Split(".");
+            var segmentNames = path.Split('.');
 
             var cur = root;
             foreach (var segmentName in segmentNames)
@@ -50,7 +50,7 @@ namespace TranformerDSLParser.Core
             if (root == null) throw new ArgumentNullException(nameof(root));
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
-            var segmentNames = path.Split(".");
+            var segmentNames = path.Split('.');
 
             var cur = root;
 
