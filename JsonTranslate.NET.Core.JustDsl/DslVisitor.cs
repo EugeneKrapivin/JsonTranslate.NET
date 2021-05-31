@@ -1,9 +1,9 @@
 ﻿using System.Linq;
+using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
-using Transformers.Core.Abstractions;
 using Transformers.Core.JustDSL.Parser;
 
-namespace Transformers.Core.JustDSL
+namespace JsonTranslate.NET.Core.JustDSL
 {
     public class DslVisitor : JustDslBaseVisitor<Instruction>
     {

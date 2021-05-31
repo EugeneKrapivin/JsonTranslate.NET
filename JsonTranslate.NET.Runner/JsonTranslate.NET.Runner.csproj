@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Transformers.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
-    <ProjectReference Include="..\Transformers.Core.JustDsl\JsonTranslate.NET.Core.JustDSL.csproj" />
-    <ProjectReference Include="..\Transformers.Core\JsonTranslate.NET.Core.csproj" />
+    <ProjectReference Include="..\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDSL.csproj" />
+    <ProjectReference Include="..\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Transformers.Core.Abstractions
+namespace JsonTranslate.NET.Core.Abstractions
 {
     public class Instruction
     {

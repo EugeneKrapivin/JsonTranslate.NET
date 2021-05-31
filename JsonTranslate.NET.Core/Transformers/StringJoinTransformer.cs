@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
-using Transformers.Core.Abstractions;
 
-namespace Transformers.Core.Transformers
+namespace JsonTranslate.NET.Core.Transformers
 {
     [Transformer(name: "str_join", requiresConfig: true)]
     public class StringJoinTransformer : IJTokenTransformer

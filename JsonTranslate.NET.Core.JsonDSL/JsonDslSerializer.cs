@@ -1,8 +1,7 @@
-﻿using System;
+﻿using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json;
-using Transformers.Core.Abstractions;
 
-namespace Transformers.Core.JsonDSL
+namespace JsonTranslate.NET.Core.JsonDSL
 {
     public class JsonDslSerializer : ISerializeDSL
     {

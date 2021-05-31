@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Transformers.Core.Abstractions
+﻿namespace JsonTranslate.NET.Core.Abstractions
 {
     public interface ISerializeDSL
     {

@@ -1,8 +1,8 @@
 ﻿using System;
+using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
-using Transformers.Core.Abstractions;
 
-namespace Transformers.Core.Transformers
+namespace JsonTranslate.NET.Core.Transformers
 {
     [Transformer(name: "unit", requiresConfig: true)]
     public class UnitTransformer : IJTokenTransformer

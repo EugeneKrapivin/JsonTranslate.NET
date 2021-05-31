@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
+using JsonTranslate.NET.Core;
+using JsonTranslate.NET.Core.JustDSL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Transformers.Core;
-using Transformers.Core.Abstractions;
-using Transformers.Core.JustDSL;
-using Transformers.Core.Transformers;
 
-namespace TranformerDSLParser
+namespace JsonTranslate.NET.Runner
 {
     public class Program
     {

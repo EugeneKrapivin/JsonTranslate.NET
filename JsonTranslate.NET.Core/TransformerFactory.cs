@@ -2,10 +2,10 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
+using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
-using Transformers.Core.Abstractions;
 
-namespace Transformers.Core
+namespace JsonTranslate.NET.Core
 {
     public sealed class TransformerFactory : ITransformerFactory
     {

@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
-using Transformers.Core.Abstractions;
+﻿using JsonTranslate.NET.Core.Abstractions;
+using Newtonsoft.Json.Linq;
 
-namespace Transformers.Core.Transformers
+namespace JsonTranslate.NET.Core.Transformers
 {
     public static class TransformerExtensions
     {

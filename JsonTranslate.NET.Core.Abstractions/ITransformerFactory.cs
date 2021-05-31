@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Newtonsoft.Json.Linq;
 
-namespace Transformers.Core.Abstractions
+namespace JsonTranslate.NET.Core.Abstractions
 {
     public interface ITransformerFactory
     {

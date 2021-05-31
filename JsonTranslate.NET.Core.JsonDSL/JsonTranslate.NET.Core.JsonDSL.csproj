@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Transformers.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
   </ItemGroup>
   
 </Project>

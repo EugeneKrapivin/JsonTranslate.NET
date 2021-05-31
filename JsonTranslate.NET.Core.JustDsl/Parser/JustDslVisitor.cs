@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\Transformers.Core.JustDsl\JustDsl.g4 by ANTLR 4.9.2
+// Generated from C:\Users\eugene.krapivin@sap.com\source\repos\TranformerDSLParser\JsonTranslate.NET.Core.JustDsl\JustDsl.g4 by ANTLR 4.9.2
 
 // Unreachable code detected
 #pragma warning disable 0162

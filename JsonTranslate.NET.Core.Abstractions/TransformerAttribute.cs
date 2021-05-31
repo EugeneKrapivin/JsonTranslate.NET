@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Transformers.Core.Abstractions
+namespace JsonTranslate.NET.Core.Abstractions
 {
     public sealed class TransformerAttribute : Attribute
     {

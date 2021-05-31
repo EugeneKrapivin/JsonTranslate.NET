@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using Antlr4.Runtime;
-using Transformers.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions;
 using Transformers.Core.JustDSL.Parser;
 
-namespace Transformers.Core.JustDSL
+namespace JsonTranslate.NET.Core.JustDSL
 {
     public class JustDslSerializer : ISerializeDSL
     {
