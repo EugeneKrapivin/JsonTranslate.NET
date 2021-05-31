@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Transformers.Core.Abstractions\Transformers.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Transformers.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
   </ItemGroup>
-  
 </Project>
