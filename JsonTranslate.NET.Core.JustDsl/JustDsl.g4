@@ -11,7 +11,7 @@ IDENTIFIER
 
 func
 	: FUNCTION_START IDENTIFIER LPAREN (json (ARG_SEPERATOR func)*)? RPAREN
-    ;
+   ;
 json
    : value
    ;

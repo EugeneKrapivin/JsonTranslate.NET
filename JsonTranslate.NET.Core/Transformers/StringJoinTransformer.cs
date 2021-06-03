@@ -50,4 +50,52 @@ namespace JsonTranslate.NET.Core.Transformers
             public string Separator { get; set; }
         }
     }
+
+    [Transformer(name: "sum", requiresConfig: true)]
+    public class ArrSumTransformer : IJTokenTransformer
+    {
+        static ArrSumTransformer()
+        {
+            TransformerFactory.RegisterTransformer<ArrSumTransformer>();
+        }
+
+        public string SourceType => "number";
+
+        public string TargetType => "number";
+
+        private readonly Config _config;
+
+        private readonly List<IJTokenTransformer> _sources = new();
+
+        public ArrSumTransformer(JObject conf)
+        {
+            if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
+
+            _config = this.GetConfig<Config>(conf);
+        }
+
+        public IJTokenTransformer Bind(params IJTokenTransformer[] sources)
+        {
+            // todo: validate all sources have target types string
+            _sources.AddRange(sources);
+
+            return this;
+        }
+
+        public JToken Transform(JToken root)
+        {
+            var arr = _sources.Single().Transform(root);
+            
+            // find best suiting type => get value
+            if (arr.All(x => x.Type == JTokenType.Integer))
+                return (arr as JArray).Select(x => x.Value<int>()).Sum();
+
+            return (arr as JArray).Select(x => x.Value<decimal>()).Sum();
+        }
+
+        private class Config
+        {
+            public string ArrPath { get; set; }
+        }
+    }
 }
