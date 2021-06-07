@@ -51,7 +51,7 @@ namespace JsonTranslate.NET.Core.Transformers
         }
     }
 
-    [Transformer(name: "sum", requiresConfig: true)]
+    [Transformer(name: "sum", requiresConfig: false)]
     public class ArrSumTransformer : IJTokenTransformer
     {
         static ArrSumTransformer()
@@ -63,15 +63,10 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public string TargetType => "number";
 
-        private readonly Config _config;
-
         private readonly List<IJTokenTransformer> _sources = new();
 
-        public ArrSumTransformer(JObject conf)
+        public ArrSumTransformer()
         {
-            if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
-
-            _config = this.GetConfig<Config>(conf);
         }
 
         public IJTokenTransformer Bind(params IJTokenTransformer[] sources)
@@ -91,11 +86,6 @@ namespace JsonTranslate.NET.Core.Transformers
                 return (arr as JArray).Select(x => x.Value<int>()).Sum();
 
             return (arr as JArray).Select(x => x.Value<decimal>()).Sum();
-        }
-
-        private class Config
-        {
-            public string ArrPath { get; set; }
         }
     }
 }

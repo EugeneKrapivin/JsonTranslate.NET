@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.2" />
-    <PackageReference Include="Antlr4BuildTasks" Version="8.14.0" />
+    <PackageReference Include="Antlr4.CodeGenerator " Version="*" />
+    <PackageReference Include="Antlr4.Runtime" Version="*" />
+    <PackageReference Include="Antlr4" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -15,14 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <Antlr4 Include="JustDsl.g4">
+    <Antlr4 Include="JustDsl.g4">
       <Generator>MSBuild:Compile</Generator>
       <Package>Transformers.Core.JustDSL.Parser</Package>
       <Visitor>true</Visitor>
       <Listener>false</Listener>
       <Error>false</Error>
       <AntOutDir>Parser</AntOutDir>
-    </Antlr4> -->
+    </Antlr4>
   </ItemGroup>
 
 </Project>

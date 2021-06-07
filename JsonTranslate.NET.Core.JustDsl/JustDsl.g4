@@ -10,8 +10,21 @@ IDENTIFIER
     ;
 
 func
-	: FUNCTION_START IDENTIFIER LPAREN (json (ARG_SEPERATOR func)*)? RPAREN
+	: FUNCTION_START IDENTIFIER LPAREN (config? argumentList?) RPAREN
    ;
+
+argument
+   : func
+   ;
+argumentList
+   : argument
+   | (ARG_SEPERATOR argument)+
+   ;
+
+config
+   : json
+   ;
+
 json
    : value
    ;

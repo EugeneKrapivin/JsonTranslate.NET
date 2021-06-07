@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using JsonTranslate.NET.Core;
-using JsonTranslate.NET.Core.JustDSL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -11,7 +10,7 @@ namespace JsonTranslate.NET.Runner
     {
         public static void Main()
         {
-            var just = new JustDslSerializer();
+            var just = new JsonTranslate.NET.Core.JustDSL.JustDslSerializer();
             var instructions = just.Parse(
 @"#str_join({""separator"":"" ""}, 
     #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, 
@@ -25,7 +24,7 @@ namespace JsonTranslate.NET.Runner
             var template = new JObject
             {
                 ["me"] = @"#str_join({""separator"":"" ""}, #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""this is my unit value""}))",
-                ["sssss"] = @"#sum({}, #valueof({""path"":""$.arr""}))"
+                ["SUM"] = @"#sum(#valueof({""path"":""$.arr""}))"
             };
 
             var p = template.Descendants().OfType<JProperty>().Where(x => x.Value.Value<string>().StartsWith("#"));
