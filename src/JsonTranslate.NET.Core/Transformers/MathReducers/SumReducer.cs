@@ -2,10 +2,10 @@
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers.Aggregators
+namespace JsonTranslate.NET.Core.Transformers.MathReducers
 {
     [Transformer(name: "sum", requiresConfig: false)]
-    public class SumAggregatingTransformer : NumberAggregatingTransformer
+    public class SumReducer : AbstractNumberReducer
     {
         protected override JToken Aggregate(JArray source) 
             => source.All(x => x.Type == JTokenType.Integer)

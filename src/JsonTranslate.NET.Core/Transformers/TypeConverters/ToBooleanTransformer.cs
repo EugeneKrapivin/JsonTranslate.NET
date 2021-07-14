@@ -2,7 +2,7 @@
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers
+namespace JsonTranslate.NET.Core.Transformers.TypeConverters
 {
     [Transformer(name: "toboolean", requiresConfig: false)]
     public class ToBooleanTransformer : IJTokenTransformer

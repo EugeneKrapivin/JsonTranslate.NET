@@ -7,9 +7,9 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Aggregators
 {
     [Transformer(name: "str_join", requiresConfig: true)]
-    public class StringJoinTransformer : IJTokenTransformer
+    public class StringJoinAggregator : IJTokenTransformer
     {
-        static StringJoinTransformer()
+        static StringJoinAggregator()
         {
             TransformerFactory.RegisterTransformer<LookupTransformer>();
         }
@@ -22,7 +22,7 @@ namespace JsonTranslate.NET.Core.Transformers.Aggregators
 
         private readonly List<IJTokenTransformer> _sources = new();
 
-        public StringJoinTransformer(JObject conf)
+        public StringJoinAggregator(JObject conf)
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 

@@ -2,9 +2,9 @@
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers.Aggregators
+namespace JsonTranslate.NET.Core.Transformers.MathReducers
 {
-    public abstract class NumberAggregatingTransformer : IJTokenTransformer
+    public abstract class AbstractNumberReducer : IJTokenTransformer
     {
         public string SourceType => "number";
 
