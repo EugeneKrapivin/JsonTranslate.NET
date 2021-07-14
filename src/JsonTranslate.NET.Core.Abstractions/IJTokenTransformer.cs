@@ -10,6 +10,6 @@ namespace JsonTranslate.NET.Core.Abstractions
 
         JToken Transform(JToken root);
 
-        IJTokenTransformer Bind(params IJTokenTransformer[] source);
+        IJTokenTransformer Bind(IJTokenTransformer source);
     }
 }

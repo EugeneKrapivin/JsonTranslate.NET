@@ -25,7 +25,7 @@ namespace JsonTranslate.NET.Core.Transformers
             _config = this.GetConfig<Config>(conf);
         }
 
-        public IJTokenTransformer Bind(params IJTokenTransformer[] source)
+        public IJTokenTransformer Bind(IJTokenTransformer source)
         {
             throw new NotSupportedException();
         }

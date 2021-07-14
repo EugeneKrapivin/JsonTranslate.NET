@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
@@ -29,11 +31,9 @@ namespace JsonTranslate.NET.Core.Transformers
 
         private IJTokenTransformer _source;
 
-        public IJTokenTransformer Bind(params IJTokenTransformer[] source)
+        public IJTokenTransformer Bind(IJTokenTransformer source)
         {
-            if (source?.Length != 1) throw new ArgumentException($"{nameof(LookupTransformer)} transformer expects exactly 1 input");
-
-            _source = source.Single();
+            _source = source ?? throw new ArgumentNullException($"{nameof(LookupTransformer)} transformer expects exactly 1 input");
 
             return this;
         }
