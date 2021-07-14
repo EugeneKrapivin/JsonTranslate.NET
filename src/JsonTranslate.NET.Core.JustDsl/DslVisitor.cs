@@ -2,7 +2,7 @@
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.JustDSL
+namespace JsonTranslate.NET.Core.JustDsl
 {
     public class DslVisitor : JustDslBaseVisitor<Instruction>
     {

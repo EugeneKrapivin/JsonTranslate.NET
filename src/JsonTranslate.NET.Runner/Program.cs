@@ -18,7 +18,7 @@ namespace JsonTranslate.NET.Runner
 
             var template = new JObject
             {
-                ["me"] = @"#str_join({""separator"":"" ""}, #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""this is my unit value""}))",
+                ["me"] = @"#str_join({""separator"":"" ""}, #lookup({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""this is my unit value""}))",
                 ["SUM"] = @"#sum(#valueof({""path"":""$.arr""}))"
             };
 

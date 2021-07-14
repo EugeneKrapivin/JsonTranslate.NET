@@ -6,23 +6,23 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
 {
-    [Transformer(name: "s_lookup_s", requiresConfig: true)]
-    public class StringToStringLookupTransformer : IJTokenTransformer
+    [Transformer(name: "lookup", requiresConfig: true)]
+    public class LookupTransformer : IJTokenTransformer
     {
-        static StringToStringLookupTransformer()
+        static LookupTransformer()
         {
-            TransformerFactory.RegisterTransformer<StringToStringLookupTransformer>();
+            TransformerFactory.RegisterTransformer<LookupTransformer>();
         }
         
-        public string SourceType => "string";
+        public string SourceType => "any";
 
-        public string TargetType => "string";
+        public string TargetType => "any";
 
         private readonly Config _config;
 
-        public StringToStringLookupTransformer(JObject conf)
+        public LookupTransformer(JObject conf)
         {
-            if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
+            if (conf == null) throw new ArgumentNullException($"{nameof(LookupTransformer)} requires configuration");
 
             _config = this.GetConfig<Config>(conf);
         }
@@ -31,7 +31,7 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public IJTokenTransformer Bind(params IJTokenTransformer[] source)
         {
-            if (source?.Length != 1) throw new ArgumentException($"{nameof(StringToStringLookupTransformer)} transformer expects exactly 1 input");
+            if (source?.Length != 1) throw new ArgumentException($"{nameof(LookupTransformer)} transformer expects exactly 1 input");
 
             _source = source.Single();
 
@@ -59,7 +59,7 @@ namespace JsonTranslate.NET.Core.Transformers
 
         private class Config
         {
-            public Dictionary<string, string> Lookup { get; set; }
+            public Dictionary<JToken, JToken> Lookup { get; set; }
 
             public HandleMissing OnMissing { get; set; }
 

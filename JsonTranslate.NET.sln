@@ -10,14 +10,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core", "s
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JsonDSL", "src\JsonTranslate.NET.Core.JsonDSL\JsonTranslate.NET.Core.JsonDSL.csproj", "{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JsonDsl", "src\JsonTranslate.NET.Core.JsonDsl\JsonTranslate.NET.Core.JsonDsl.csproj", "{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.Abstractions", "src\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj", "{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JustDSL", "src\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDSL.csproj", "{DAE73CBF-CA2B-4E99-93A6-EA1DCE2A9606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JustDsl", "src\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDsl.csproj", "{DAE73CBF-CA2B-4E99-93A6-EA1DCE2A9606}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B765234-030B-424B-A74A-343EBA8030CF}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9486E3A5-AB73-4A49-825C-24B95F616931}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{42D7EA7A-D561-4098-BACB-F5FC9CDDA475}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{42D7EA7A-D561-4098-BACB-F5FC9CDDA475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

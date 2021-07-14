@@ -11,7 +11,7 @@ namespace JsonTranslate.NET.Core.Transformers
     {
         static StringJoinTransformer()
         {
-            TransformerFactory.RegisterTransformer<StringToStringLookupTransformer>();
+            TransformerFactory.RegisterTransformer<LookupTransformer>();
         }
 
         public string SourceType => "string";

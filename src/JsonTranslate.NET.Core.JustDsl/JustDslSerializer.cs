@@ -2,6 +2,7 @@
 using System.Text;
 using Antlr4.Runtime;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.JustDsl;
 
 namespace JsonTranslate.NET.Core.JustDSL
 {
