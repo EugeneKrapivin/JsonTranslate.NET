@@ -18,19 +18,19 @@ namespace JsonTranslate.NET.Transformer.UnitTests
             {
                 yield return new TestCaseData(
                     new JObject {["path"] = "expected value"},
-                    new JObject {["path"] = "$.path"}, 
+                    new JObject {["path"] = "$.path"},
                     JToken.FromObject("expected value"));
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["path"] = "expected value"}},
-                    new JObject { ["path"] = "$.inner.path" },
+                    new JObject {["inner"] = new JObject {["path"] = "expected value"}},
+                    new JObject {["path"] = "$.inner.path"},
                     JToken.FromObject("expected value"));
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["path"] = "expected value" } },
-                    new JObject { ["path"] = "$..path" },
+                    new JObject {["inner"] = new JObject {["path"] = "expected value"}},
+                    new JObject {["path"] = "$..path"},
                     JToken.FromObject("expected value"));
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["inner"] = new JObject { ["path"] = "expected value" } }},
-                    new JObject { ["path"] = "$..[?(@.path)].path" },
+                    new JObject {["inner"] = new JObject {["inner"] = new JObject {["path"] = "expected value"}}},
+                    new JObject {["path"] = "$..[?(@.path)].path"},
                     JToken.FromObject("expected value"));
             }
         }
@@ -40,20 +40,20 @@ namespace JsonTranslate.NET.Transformer.UnitTests
             get
             {
                 yield return new TestCaseData(
-                    new JObject { ["path"] = "expected value" },
-                    new JObject { ["path"] = "$.pathDoesn'tExist" },
+                    new JObject {["path"] = "expected value"},
+                    new JObject {["path"] = "$.pathDoesn'tExist"},
                     null);
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["path"] = "expected value" } },
-                    new JObject { ["path"] = "$.inner.pathDoesn'tExist" },
+                    new JObject {["inner"] = new JObject {["path"] = "expected value"}},
+                    new JObject {["path"] = "$.inner.pathDoesn'tExist"},
                     null);
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["path"] = "expected value" } },
-                    new JObject { ["path"] = "$..pathDoesn'tExist" },
+                    new JObject {["inner"] = new JObject {["path"] = "expected value"}},
+                    new JObject {["path"] = "$..pathDoesn'tExist"},
                     null);
                 yield return new TestCaseData(
-                    new JObject { ["inner"] = new JObject { ["inner"] = new JObject { ["path"] = "expected value" } } },
-                    new JObject { ["path"] = "$..[?(@.path)].pathDoesn'tExist" },
+                    new JObject {["inner"] = new JObject {["inner"] = new JObject {["path"] = "expected value"}}},
+                    new JObject {["path"] = "$..[?(@.path)].pathDoesn'tExist"},
                     null);
             }
         }
@@ -63,28 +63,28 @@ namespace JsonTranslate.NET.Transformer.UnitTests
             get
             {
                 yield return new TestCaseData(
-                    new JObject { ["path"] = "expected value" },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = "expected value"},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.String);
                 yield return new TestCaseData(
-                    new JObject { ["path"] = 1 },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = 1},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.Integer);
                 yield return new TestCaseData(
-                    new JObject { ["path"] = 1d },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = 1d},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.Float);
                 yield return new TestCaseData(
-                    new JObject { ["path"] = true },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = true},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.Boolean);
                 yield return new TestCaseData(
-                    new JObject { ["path"] = new JArray(1,2,3,4) },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = new JArray(1, 2, 3, 4)},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.Array);
                 yield return new TestCaseData(
-                    new JObject { ["path"] = new JObject {} },
-                    new JObject { ["path"] = "$.path" },
+                    new JObject {["path"] = new JObject { }},
+                    new JObject {["path"] = "$.path"},
                     JTokenType.Object);
             }
         }
@@ -144,7 +144,9 @@ namespace JsonTranslate.NET.Transformer.UnitTests
 
             var sut = new ValueOfTransformer(conf);
 
-            Assert.That(() => sut.Transform(json), Throws.InstanceOf<Newtonsoft.Json.JsonException>().With.Message.EqualTo("Path returned multiple tokens."));
+            Assert.That(() => sut.Transform(json),
+                Throws.InstanceOf<Newtonsoft.Json.JsonException>().With.Message
+                    .EqualTo("Path returned multiple tokens."));
         }
 
         [Test]
@@ -163,7 +165,6 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         [Test]
         public void Valueof_Does_Not_Allow_Bindings()
         {
-
             var sut = new ValueOfTransformer(new JObject {["path"] = "valid"});
             Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.TypeOf<NotSupportedException>());
         }

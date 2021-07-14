@@ -23,6 +23,8 @@ namespace JsonTranslate.NET.Core.Transformers
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
             _config = this.GetConfig<Config>(conf);
+            if (_config.Value == null)
+                throw new ArgumentException("Configured value for `unit` transformer can not be null");
         }
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
