@@ -9,22 +9,23 @@ namespace JsonTranslate.NET.Core.JustDSL
         public override Instruction VisitFunc(JustDslParser.FuncContext context)
         {
             var name = context.IDENTIFIER().GetText();
+
             var conf = context.config()?.GetText();
-            var bindings = context.func();
+            var bindings = context.argumentList();
 
             var instruction = new Instruction
             {
                 Name = name,
                 Config = conf == null ? null : JObject.Parse(conf),
-                Bindings = bindings.Select(x => x.Accept(this)).ToList()
+                Bindings = bindings?.argument().Select(x => x.Accept(this)).ToList()
             };
 
             return instruction;
         }
 
-        public override Instruction VisitArgumentList()
+        public override Instruction VisitArgument(JustDslParser.ArgumentContext context)
         {
-            
+            return context.func().Accept(this);
         }
     }
 }

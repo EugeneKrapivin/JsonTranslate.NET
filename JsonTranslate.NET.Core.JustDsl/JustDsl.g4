@@ -10,14 +10,15 @@ IDENTIFIER
     ;
 
 func
-	: FUNCTION_START IDENTIFIER LPAREN (config? argumentList?) RPAREN
-   ;
+	: FUNCTION_START IDENTIFIER LPAREN config? argumentList? RPAREN
+    ;
 
 argument
    : func
    ;
+
 argumentList
-   : argument
+   : ARG_SEPERATOR? argument
    | (ARG_SEPERATOR argument)+
    ;
 

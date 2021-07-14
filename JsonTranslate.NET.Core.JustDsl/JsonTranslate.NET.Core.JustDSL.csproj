@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -19,14 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Antlr4 Include="JustDsl.g4">
+    <!--<Antlr4 Include="JustDsl.g4">
       <Generator>MSBuild:Compile</Generator>
       <Package>Transformers.Core.JustDSL.Parser</Package>
       <Visitor>true</Visitor>
       <Listener>false</Listener>
       <Error>false</Error>
       <AntOutDir>Parser</AntOutDir>
-    </Antlr4>
+    </Antlr4>-->
   </ItemGroup>
 
 </Project>

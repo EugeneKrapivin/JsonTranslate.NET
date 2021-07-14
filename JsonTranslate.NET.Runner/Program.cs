@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using JsonTranslate.NET.Core;
+using JsonTranslate.NET.Core.JustDSL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,16 +11,10 @@ namespace JsonTranslate.NET.Runner
     {
         public static void Main()
         {
-            var just = new JsonTranslate.NET.Core.JustDSL.JustDslSerializer();
-            var instructions = just.Parse(
-@"#str_join({""separator"":"" ""}, 
-    #s_lookup_s({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, 
-        #valueof({""path"":""$.test""})), 
-    #unit({""value"":""fuck you""}))");
+            var just = new JustDslSerializer();
 
-			var transformerFactory = new TransformerFactory();
+            var transformerFactory = new TransformerFactory();
 
-            var transformerChain = instructions.BuildTransformationTree(transformerFactory);
 
             var template = new JObject
             {
@@ -31,7 +26,7 @@ namespace JsonTranslate.NET.Runner
 
 			var source = new JObject
             {
-                ["test"] = "testush_missing!",
+                ["test"] = "testush_missing",
                 ["arr"] = new JArray(1,2,3,4,5,6,7,8,9.0)
             };
 
