@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
@@ -33,6 +31,8 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
         {
+            if (_source != null) throw new NotSupportedException($"{nameof(LookupTransformer)} transformer doesn't allow multiple bindings");
+
             _source = source ?? throw new ArgumentNullException($"{nameof(LookupTransformer)} transformer expects exactly 1 input");
 
             return this;
@@ -40,9 +40,9 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public JToken Transform(JToken root)
         {
-            var value = _source.Transform(root).Value<string>();
+            var value = _source.Transform(root);
 
-            if (!_config.Lookup.TryGetValue(value, out var lookUpResult))
+            if (!TryFind(_config.Lookup, value, out var lookUpResult))
             {
                 if (_config.OnMissing == Config.HandleMissing.Value)
                 {
@@ -55,15 +55,22 @@ namespace JsonTranslate.NET.Core.Transformers
             }
 
             return lookUpResult;
+
+            bool TryFind(List<KeyValuePair<JToken, JToken>> lookupTable, JToken key, out JToken value)
+            {
+                value = lookupTable.SingleOrDefault(x => JToken.DeepEquals(x.Key, key)).Value;
+
+                return value != null;
+            }
         }
 
-        private class Config
+        internal class Config
         {
-            public Dictionary<JToken, JToken> Lookup { get; set; }
+            public List<KeyValuePair<JToken, JToken>> Lookup { get; set; } = new();
 
-            public HandleMissing OnMissing { get; set; }
+            public HandleMissing OnMissing { get; set; } = HandleMissing.Value;
 
-            public string Default { get; set; }
+            public JToken Default { get; set; }
 
             public enum HandleMissing
             {
