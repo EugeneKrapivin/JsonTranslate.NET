@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Runner", "JsonTranslate.NET.Runner\JsonTranslate.NET.Runner.csproj", "{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Runner", "src\JsonTranslate.NET.Runner\JsonTranslate.NET.Runner.csproj", "{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core", "JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj", "{A060E28A-B91B-474B-8B0B-3B678D65AD7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core", "src\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj", "{A060E28A-B91B-474B-8B0B-3B678D65AD7A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JsonDSL", "JsonTranslate.NET.Core.JsonDSL\JsonTranslate.NET.Core.JsonDSL.csproj", "{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JsonDSL", "src\JsonTranslate.NET.Core.JsonDSL\JsonTranslate.NET.Core.JsonDSL.csproj", "{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.Abstractions", "JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj", "{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.Abstractions", "src\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj", "{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JustDSL", "JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDSL.csproj", "{DAE73CBF-CA2B-4E99-93A6-EA1DCE2A9606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core.JustDSL", "src\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDSL.csproj", "{DAE73CBF-CA2B-4E99-93A6-EA1DCE2A9606}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B765234-030B-424B-A74A-343EBA8030CF}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9486E3A5-AB73-4A49-825C-24B95F616931}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{42D7EA7A-D561-4098-BACB-F5FC9CDDA475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D} = {9486E3A5-AB73-4A49-825C-24B95F616931}
+		{A060E28A-B91B-474B-8B0B-3B678D65AD7A} = {9486E3A5-AB73-4A49-825C-24B95F616931}
+		{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE} = {9486E3A5-AB73-4A49-825C-24B95F616931}
+		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {9486E3A5-AB73-4A49-825C-24B95F616931}
+		{DAE73CBF-CA2B-4E99-93A6-EA1DCE2A9606} = {9486E3A5-AB73-4A49-825C-24B95F616931}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B39144E8-1E19-479C-A65F-1EDC9EE6F057}
