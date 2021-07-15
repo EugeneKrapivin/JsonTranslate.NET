@@ -10,7 +10,7 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
         private IJTokenTransformer _source;
         public string SourceType => "any";
 
-        public string TargetType => JTokenType.Boolean.ToString();
+        public string TargetType => JTokenType.Integer.ToString();
 
         public JToken Transform(JToken root)
         {

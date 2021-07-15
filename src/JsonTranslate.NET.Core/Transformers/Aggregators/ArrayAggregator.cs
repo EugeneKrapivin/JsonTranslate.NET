@@ -4,7 +4,7 @@ using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers.StringReducers
+namespace JsonTranslate.NET.Core.Transformers.Aggregators
 {
     [Transformer(name: "toarray", requiresConfig: false)]
     public class ArrayAggregator : IJTokenTransformer
@@ -12,7 +12,7 @@ namespace JsonTranslate.NET.Core.Transformers.StringReducers
         public string SourceType => "any";
         public string TargetType => "array";
 
-        private List<IJTokenTransformer> _sources = new();
+        private readonly List<IJTokenTransformer> _sources = new();
 
         public JToken Transform(JToken root)
         {
