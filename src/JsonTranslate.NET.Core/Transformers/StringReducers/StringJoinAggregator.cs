@@ -4,7 +4,7 @@ using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers.Aggregators
+namespace JsonTranslate.NET.Core.Transformers.StringReducers
 {
     [Transformer(name: "str_join", requiresConfig: true)]
     public class StringJoinAggregator : IJTokenTransformer

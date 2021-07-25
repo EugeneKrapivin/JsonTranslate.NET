@@ -4,6 +4,7 @@ using JsonTranslate.NET.Core;
 using JsonTranslate.NET.Core.JustDSL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace JsonTranslate.NET.Runner
 {
@@ -18,22 +19,29 @@ namespace JsonTranslate.NET.Runner
 
             var template = new JObject
             {
-                ["me"] = @"#str_join({""separator"":"" ""}, #lookup({""lookup"":{""testush_missing"":""test!!!""},""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""this is my unit value""}))",
-                ["SUM"] = @"#sum(#valueof({""path"":""$.arr""}))"
+                ["me"] = @"#str_join({""separator"":"" ""}, #lookup({""lookup"":[{""key"":""look me up"",""value"":""test!!!""}],""onMissing"":""default"",""default"":""test???""}, #valueof({""path"":""$.test""})), #unit({""value"":""this is my unit value""}))",
             };
 
             var p = template.Descendants().OfType<JProperty>().Where(x => x.Value.Value<string>().StartsWith("#"));
 
 			var source = new JObject
             {
-                ["test"] = "testush_missing",
-                ["arr"] = new JArray(1,2,3,4,5,6,7,8,9.0)
+                ["test"] = "look me up",
             };
 
 			foreach (var s in p)
             {
                 var t = just.Parse(s.Value.Value<string>());
-
+                System.Console.WriteLine(JsonConvert.SerializeObject(t, new JsonSerializerSettings
+                {
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    },
+                    NullValueHandling = NullValueHandling.Ignore,
+                    Formatting = Formatting.Indented
+                }));
+                
                 s.Value = t.BuildTransformationTree(transformerFactory).Transform(source);
             }
 
