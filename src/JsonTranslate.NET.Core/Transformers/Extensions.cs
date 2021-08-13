@@ -5,7 +5,6 @@ namespace JsonTranslate.NET.Core.Transformers
 {
     public static class Extensions
     {
-
         internal static Type GetType(JTokenType jType)
         {
             return jType switch

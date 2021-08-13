@@ -8,16 +8,16 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
     public class ToStringTransformer : IJTokenTransformer
     {
         private IJTokenTransformer _source;
-        public string SourceType => "any";
 
-        public string TargetType => JTokenType.Boolean.ToString();
-
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var token = _source.Transform(root);
+            var token = _source.Transform(root, ctx);
 
             return token.ToString();
         }
+
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
         {

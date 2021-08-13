@@ -8,11 +8,9 @@ namespace JsonTranslate.NET.Core.Transformers.StringReducers
     [Transformer(name: "lastindexof", requiresConfig: false)]
     public class LastIndexOfReducer : AbstractStringReducingTransformer
     {
-        public override string TargetType => "number";
-
-        public override JToken Transform(JToken root)
+        public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var sources = _sources.Select(x => Newtonsoft.Json.Linq.Extensions.Value<string>(x.Transform(root))).ToArray();
+            var sources = _sources.Select(x => Newtonsoft.Json.Linq.Extensions.Value<string>(x.Transform(root, ctx))).ToArray();
 
             if (sources.Length < 2)
                 throw new ArgumentException("Not enough inputs passed into `lastindexof` transformer, expecting 2");

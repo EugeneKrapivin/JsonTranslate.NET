@@ -2,14 +2,26 @@
 
 namespace JsonTranslate.NET.Core.Abstractions
 {
-    public interface IJTokenTransformer
+    public interface IAccepting<out T>
     {
-        string SourceType { get; }
+        TR Accept<TR>(IVisitor<T, TR> visitor);
+    }
 
-        string TargetType { get; }
+    public interface IVisitor<in T, out TR>
+    {
+        TR Visit(T target);
+    }
 
-        JToken Transform(JToken root);
+    public interface IJTokenTransformer : IAccepting<IJTokenTransformer>
+    {
+        JToken Transform(JToken root, TransformationContext ctx = null);
 
         IJTokenTransformer Bind(IJTokenTransformer source);
+    }
+
+    public class TransformationContext
+    {
+        public JToken Root { get; set; }
+        public JToken CurrentItem { get; set; }
     }
 }

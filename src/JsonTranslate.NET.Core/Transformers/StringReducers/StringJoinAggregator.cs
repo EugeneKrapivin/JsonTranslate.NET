@@ -37,10 +37,13 @@ namespace JsonTranslate.NET.Core.Transformers.StringReducers
             return this;
         }
 
-        public JToken Transform(JToken root)
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
+
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
             // TODO: validate at least 1 source
-            var values = _sources.Select(x => x.Transform(root).Value<string>());
+            var values = _sources.Select(x => x.Transform(root, ctx).Value<string>());
 
             return string.Join(_config.Separator, values);
         }

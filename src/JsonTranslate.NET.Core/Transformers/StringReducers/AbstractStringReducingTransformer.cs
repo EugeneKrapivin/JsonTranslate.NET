@@ -8,9 +8,6 @@ namespace JsonTranslate.NET.Core.Transformers.StringReducers
 {
     public abstract class AbstractStringReducingTransformer : IJTokenTransformer
     {
-        public string SourceType => "string";
-
-        public virtual string TargetType => "string";
 
         protected readonly List<IJTokenTransformer> _sources = new ();
 
@@ -23,6 +20,9 @@ namespace JsonTranslate.NET.Core.Transformers.StringReducers
             return this;
         }
 
-        public abstract JToken Transform(JToken root);
+        public abstract JToken Transform(JToken root, TransformationContext ctx = null);
+
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Exceptions;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
@@ -12,19 +13,15 @@ namespace JsonTranslate.NET.Core.Transformers
             TransformerFactory.RegisterTransformer<UnitTransformer>();
         }
 
-        public string SourceType => "any";
-
-        public string TargetType => "any";
-
-        private readonly Config _config;
+        private readonly UnitTransformerConfig _unitTransformerConfig;
 
         public UnitTransformer(JObject conf)
         {
-            if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
+            if (conf == null) throw new TransformerConfigurationMissingException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = this.GetConfig<Config>(conf);
-            if (_config.Value == null)
-                throw new ArgumentException("Configured value for `unit` transformer can not be null");
+            _unitTransformerConfig = this.GetConfig<UnitTransformerConfig>(conf);
+            if (_unitTransformerConfig.Value == null)
+                throw new TransformerConfigurationInvalidException("Configured value for `unit` transformer can not be null");
         }
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
@@ -32,12 +29,15 @@ namespace JsonTranslate.NET.Core.Transformers
             throw new NotSupportedException();
         }
 
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            return JToken.FromObject(_config.Value);
+            return JToken.FromObject(_unitTransformerConfig.Value);
         }
 
-        private class Config
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
+
+        public class UnitTransformerConfig
         {
             public object Value { get; set; }
         }

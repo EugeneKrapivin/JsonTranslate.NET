@@ -1,6 +1,8 @@
+using JsonTranslate.NET.Core;
 using JsonTranslate.NET.Core.JsonDSL;
 using NUnit.Framework;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.JustDsl.UnitTests
 {
@@ -56,7 +58,7 @@ namespace JsonTranslate.NET.JustDsl.UnitTests
             var transformerFactory = new TransformerFactory();
             var transformer = instruction.BuildTransformationTree(transformerFactory);
 
-            var result = transformer.Transform(sourceJson);
+            var result = transformer.Transform(sourceJson, null);
         }
     }
 }

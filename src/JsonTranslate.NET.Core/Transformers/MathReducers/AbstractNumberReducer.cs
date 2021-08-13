@@ -6,9 +6,6 @@ namespace JsonTranslate.NET.Core.Transformers.MathReducers
 {
     public abstract class AbstractNumberReducer : IJTokenTransformer
     {
-        public string SourceType => "number";
-
-        public string TargetType => "number";
 
         private IJTokenTransformer _source;
 
@@ -21,11 +18,14 @@ namespace JsonTranslate.NET.Core.Transformers.MathReducers
 
         protected abstract JToken Aggregate(JArray source);
 
-        public virtual JToken Transform(JToken root)
+        public virtual JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var arr = _source.Transform(root);
+            var arr = _source.Transform(root, ctx);
 
             return Aggregate(arr as JArray);
         }
+
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
     }
 }

@@ -8,13 +8,10 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
     public class ToIntegerTransformer : IJTokenTransformer
     {
         private IJTokenTransformer _source;
-        public string SourceType => "any";
 
-        public string TargetType => JTokenType.Integer.ToString();
-
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var token = _source.Transform(root);
+            var token = _source.Transform(root, ctx);
 
             return token switch
             {
@@ -25,6 +22,9 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
                 var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.Integer}")
             };
         }
+
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
         {

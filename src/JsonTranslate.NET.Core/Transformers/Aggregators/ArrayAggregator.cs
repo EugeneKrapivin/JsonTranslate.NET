@@ -14,15 +14,18 @@ namespace JsonTranslate.NET.Core.Transformers.Aggregators
 
         private readonly List<IJTokenTransformer> _sources = new();
 
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
             var arr = new JArray();
-            foreach (var element in _sources.Select(source => source.Transform(root)).ToArray())
+            foreach (var element in _sources.Select(source => source.Transform(root, ctx)).ToArray())
             {
                 arr.Add(element);
             }
             return arr;
         }
+
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
         {

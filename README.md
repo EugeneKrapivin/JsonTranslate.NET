@@ -6,7 +6,7 @@ library provides the ability to translate JSONs into other JSONs by using a DSL.
 
 ## Usage
 
-The library is intended to be use in using 2 build it [DSL](https://en.wikipedia.org/wiki/Domain-specific_language)s:
+The library is intended to be integrated using 2 built-in [DSL](https://en.wikipedia.org/wiki/Domain-specific_language)s:
 
 * `JSON` based DSL that will probably be easier to compose in a frontend.
 * a custom DSL inspire by [JUST.net](https://github.com/WorkMaze/JUST.net), providing a lean language to describe transformation chains.
@@ -125,7 +125,7 @@ After finding the value in the dictionary (or handling an event of a missing val
 
 > Bindings are edited out for brevity.
 
-Notice that the `str_join` bindings contains 2 bindings: `lookup` and `unit`. The fact that the bindings propery is an array allows the user to pass multiple values to be processed into the transformer.
+Notice that the `str_join` bindings contains 2 bindings: `lookup` and `unit`. The fact that the bindings property is an array allows the user to pass multiple values to be processed into the transformer.
 
 > The `unit` transformer is used to pass a constant value into the chain, without resorting to hacks like adding the value on top of the source json.
 

@@ -13,18 +13,14 @@ namespace JsonTranslate.NET.Core.Transformers
         {
             TransformerFactory.RegisterTransformer<LookupTransformer>();
         }
-        
-        public string SourceType => "any";
 
-        public string TargetType => "any";
-
-        private readonly Config _config;
+        private readonly LookupConfig _lookupConfig;
 
         public LookupTransformer(JObject conf)
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(LookupTransformer)} requires configuration");
 
-            _config = this.GetConfig<Config>(conf);
+            _lookupConfig = this.GetConfig<LookupConfig>(conf);
         }
 
         private IJTokenTransformer _source;
@@ -38,19 +34,19 @@ namespace JsonTranslate.NET.Core.Transformers
             return this;
         }
 
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var value = _source.Transform(root);
+            var value = _source.Transform(root, ctx);
 
-            if (!TryFind(_config.Lookup, value, out var lookUpResult))
+            if (!TryFind(_lookupConfig.Lookup, value, out var lookUpResult))
             {
-                if (_config.OnMissing == Config.HandleMissing.Value)
+                if (_lookupConfig.OnMissing == LookupConfig.HandleMissing.Value)
                 {
                     return value;
                 }
                 else
                 {
-                    return _config.Default;
+                    return _lookupConfig.Default;
                 }
             }
 
@@ -64,7 +60,10 @@ namespace JsonTranslate.NET.Core.Transformers
             }
         }
 
-        internal class Config
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
+
+        public class LookupConfig
         {
             public List<KeyValuePair<JToken, JToken>> Lookup { get; set; } = new();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Exceptions;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.TypeConverters
@@ -8,13 +9,10 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
     public class ToBooleanTransformer : IJTokenTransformer
     {
         private IJTokenTransformer _source;
-        public string SourceType => "any";
-        
-        public string TargetType => JTokenType.Boolean.ToString();
 
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var token = _source.Transform(root);
+            var token = _source.Transform(root, ctx);
             
             return token switch
             {
@@ -27,9 +25,14 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
 
         }
 
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
+
         public IJTokenTransformer Bind(IJTokenTransformer source)
         {
-            _source = source ?? throw new ArgumentNullException(nameof(source));
+            if (ReferenceEquals(this, source)) throw new TransformerBindingException("Cannot bind to self");
+            
+            _source = source ?? throw new TransformerBindingException("Cannot bind `null` as transformer"); // TODO
 
             return this;
         }

@@ -12,17 +12,13 @@ namespace JsonTranslate.NET.Core.Transformers
             TransformerFactory.RegisterTransformer<ValueOfTransformer>();
         }
 
-        public string SourceType => "any";
-
-        public string TargetType => "any";
-
-        private readonly Config _config;
+        private readonly ValueOfTransformerConfig _valueOfTransformerConfig;
 
         public ValueOfTransformer(JObject conf)
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = this.GetConfig<Config>(conf);
+            _valueOfTransformerConfig = this.GetConfig<ValueOfTransformerConfig>(conf);
         }
 
         public IJTokenTransformer Bind(IJTokenTransformer source)
@@ -30,12 +26,15 @@ namespace JsonTranslate.NET.Core.Transformers
             throw new NotSupportedException();
         }
 
-        public JToken Transform(JToken root)
+        public JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            return root.SelectToken(_config.Path);
+            return root.SelectToken(_valueOfTransformerConfig.Path);
         }
 
-        private class Config
+        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
+            => visitor.Visit(this);
+
+        private class ValueOfTransformerConfig
         {
             public string Path { get; set; }
         }

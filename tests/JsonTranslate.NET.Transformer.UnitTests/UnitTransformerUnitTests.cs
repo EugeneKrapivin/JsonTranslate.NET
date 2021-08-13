@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Exceptions;
 using JsonTranslate.NET.Core.Transformers;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
@@ -49,13 +50,15 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         [Test]
         public void Unit_Should_Not_Allow_Null_Value()
         {
-            Assert.That(() => new UnitTransformer(new JObject { ["value"] = null }), Throws.ArgumentException);
+            Assert.That(() => new UnitTransformer(new JObject { ["value"] = null }), 
+                Throws.TypeOf<TransformerConfigurationInvalidException>());
         }
 
         [Test]
         public void Unit_Requires_Config()
         {
-            Assert.That(() => new UnitTransformer(null), Throws.ArgumentNullException);
+            Assert.That(() => new UnitTransformer(null), 
+                Throws.TypeOf<TransformerConfigurationMissingException>());
         }
 
         [Test]
