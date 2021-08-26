@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Exceptions;
-using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections

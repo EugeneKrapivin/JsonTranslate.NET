@@ -16,6 +16,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
 
         public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
+            EnsureSource(source);
+            
             if (source is KeyedTransformer)
             {
                 _sources.Add(source);

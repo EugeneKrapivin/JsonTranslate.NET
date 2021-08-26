@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using JsonTranslate.NET.Core.Transformers;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
-using NSubstitute.Core.Arguments;
 using NUnit.Framework;
 
 namespace JsonTranslate.NET.Transformer.UnitTests

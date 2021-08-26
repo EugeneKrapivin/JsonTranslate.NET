@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using JsonTranslate.NET.Core.Transformers.TypeConverters;
+﻿using JsonTranslate.NET.Core.Transformers.TypeConverters;
 
 using NUnit.Framework;
 

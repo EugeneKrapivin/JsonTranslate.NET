@@ -13,10 +13,12 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
         private IJTokenTransformer _source;
         private IJTokenTransformer _keySelector;
         private IJTokenTransformer _valueSelector;
-
-        public override IEnumerable<JTokenType> SupportedTypes { get; }
-        public override IEnumerable<JTokenType> SupportedResults { get; }
-        public override IEnumerable<IJTokenTransformer> Sources { get; }
+        
+        private List<IJTokenTransformer> _sources = new(3);
+        
+        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> SupportedResults => new[] {JTokenType.Object};
+        public override IEnumerable<IJTokenTransformer> Sources => _sources;
 
         public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
@@ -37,6 +39,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
             {
                 throw new Exception("Transformer expects exactly 3 bindings (sourceSelector, keySelector, valueSelector)");
             }
+            
+            _sources.Add(source);
 
             EnsureNoCycles();
 

@@ -1,9 +1,4 @@
-﻿using System;
-
-using JsonTranslate.NET.Core.Transformers.TypeConverters;
-
-using Newtonsoft.Json.Linq;
-
+﻿using JsonTranslate.NET.Core.Transformers.TypeConverters;
 using NUnit.Framework;
 
 namespace JsonTranslate.NET.Transformer.UnitTests.TypeConverters

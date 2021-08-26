@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using JsonTranslate.NET.Core.Transformers.TypeConverters;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace JsonTranslate.NET.Transformer.UnitTests.TypeConverters

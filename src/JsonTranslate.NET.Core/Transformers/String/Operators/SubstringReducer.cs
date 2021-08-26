@@ -23,7 +23,7 @@ namespace JsonTranslate.NET.Core.Transformers.String.Operators
 
         public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
-            if (source == null) throw new CannotBindToNullException();
+            EnsureSource(source);
 
             if (_source == null)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using JsonTranslate.NET.Core.Abstractions.Exceptions;
+﻿using JsonTranslate.NET.Core.Abstractions.Exceptions;
 
 using Newtonsoft.Json.Linq;
 

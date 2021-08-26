@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;
-using JsonTranslate.NET.Core.Transformers.Collections;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.TypeConverters
