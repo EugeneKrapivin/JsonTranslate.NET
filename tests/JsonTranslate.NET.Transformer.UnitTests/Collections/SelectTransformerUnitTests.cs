@@ -29,7 +29,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
                 .Bind(type_prop)
                 .Bind(city_prop);
 
-            var sut = new SelectTransformation();
+            var sut = new SelectTransformer();
 
             var source = JArray.Parse(@"[{
                 ""type"": ""home"",
@@ -140,7 +140,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
                 .Bind(amount_prop)
                 .Bind(currency_prop);
 
-            var selector = new SelectTransformation();
+            var selector = new SelectTransformer();
 
             selector
                 .Bind(new ValueOfTransformer(new() { ["path"] = "$.transactions" }))
@@ -171,7 +171,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
                 .Bind(new CurrentItemSelector()
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$" })));
 
-            var sut = new SelectTransformation();
+            var sut = new SelectTransformer();
 
             var source = JArray.Parse(@"[""0"",""1"",""2"",""3""]");
 

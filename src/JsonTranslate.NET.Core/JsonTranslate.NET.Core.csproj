@@ -10,8 +10,4 @@
   <ItemGroup>
     <InternalsVisibleTo Include="JsonTranslate.NET.Transformer.UnitTests" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Transformers\Operators\" />
-  </ItemGroup>
 </Project>
