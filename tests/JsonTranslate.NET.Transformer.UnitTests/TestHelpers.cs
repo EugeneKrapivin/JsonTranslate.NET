@@ -1,11 +1,8 @@
-﻿
-using JsonTranslate.NET.Core.Abstractions;
-
+﻿using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
-
 using NSubstitute;
 
-namespace JsonTranslate.NET.Transformer.UnitTests.TypeConverters
+namespace JsonTranslate.NET.Transformer.UnitTests
 {
     public static class TestHelpers
     {

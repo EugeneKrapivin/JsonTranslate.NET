@@ -41,8 +41,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
                 {
                     array.Add(new JObject
                     {
-                        [_config.KeyProp] = property.Name,
-                        [_config.ValueProp] = property.Value
+                        [_config.Key] = property.Name,
+                        [_config.Value] = property.Value
                     });
 
                     return array;
@@ -50,8 +50,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
 
         public class DeconstructTransformerConfig
         {
-            public string KeyProp { get; set; } = "key";
-            public string ValueProp { get; set; } = "value";
+            public string Key { get; set; } = "key";
+            public string Value { get; set; } = "value";
         }
     }
 }

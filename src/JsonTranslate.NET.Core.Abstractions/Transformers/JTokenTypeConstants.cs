@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Abstractions.Transformers
@@ -29,16 +30,14 @@ namespace JsonTranslate.NET.Core.Abstractions.Transformers
 
         public static IEnumerable<JTokenType> None => Enumerable.Empty<JTokenType>();
 
-        public static bool IsNumeric(this JTokenType type) => Numeric.Contains(type);
-
         public static bool IsNumeric(this JToken token) => Numeric.Contains(token.Type);
 
-        public static bool EnsureType(this IEnumerable<JTokenType> source, JTokenType target) => source.Contains(target);
-
-        public static bool Only(this IEnumerable<JTokenType> source, JTokenType target)
+        public static void EnsureNumeric(this JToken token)
         {
-            var jTokenTypes = source as JTokenType[] ?? source.ToArray();
-            return jTokenTypes.Contains(target) && jTokenTypes.Count() == 1;
+            if (!Numeric.Contains(token.Type))
+            {
+                throw new IncompatibleTypeException(JTokenType.Float, token.Type);
+            }
         }
     }
 }
