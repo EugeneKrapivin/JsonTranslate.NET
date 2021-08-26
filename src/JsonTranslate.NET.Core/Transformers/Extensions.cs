@@ -1,26 +1,21 @@
 ﻿using System;
+
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
+
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
 {
     public static class Extensions
     {
-        internal static Type GetType(JTokenType jType)
-        {
-            return jType switch
-            {
-                JTokenType.Object => typeof(object),
-                JTokenType.Array => typeof(Array),
-                JTokenType.Integer => typeof(int),
-                JTokenType.Float => typeof(float),
-                JTokenType.String => typeof(string),
-                JTokenType.Boolean => typeof(bool),
-                JTokenType.Date => typeof(DateTime),
-                JTokenType.Bytes => typeof(byte),
-                JTokenType.Guid => typeof(Guid),
-                JTokenType.TimeSpan => typeof(TimeSpan),
-                _ => null
-            };
-        }
+        public static JToken ValidateNonNull(this JToken tok) => tok ?? throw new TransformationResultCannotBeNullException();
+
+        public static JToken ValidateType(this JToken tok, JTokenType type) => 
+            tok.Type == type 
+                ? tok 
+                : throw new IncompatibleTypeException(type, tok.Type);
+
+        public static T As<T>(this JToken tok) where T : JToken =>
+            tok as T; // todo: blasphemy 
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using JsonTranslate.NET.Core.Transformers;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
@@ -101,7 +102,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
             var sut = new LookupTransformer(JObject.FromObject(config));
             
             Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.Nothing);
-            Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.InstanceOf<NotSupportedException>());
+            Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.InstanceOf<CanHaveOnlyOneBindingException>());
         }
 
         [Test]
@@ -116,7 +117,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
 
             var sut = new LookupTransformer(JObject.FromObject(config));
 
-            Assert.That(() => sut.Bind(null), Throws.ArgumentNullException);
+            Assert.That(() => sut.Bind(null), Throws.TypeOf<CannotBindToNullException>());
         }
     }
 }

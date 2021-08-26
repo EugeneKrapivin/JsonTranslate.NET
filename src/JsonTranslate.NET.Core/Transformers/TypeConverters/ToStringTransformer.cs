@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
+using JsonTranslate.NET.Core.Transformers.Collections;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.TypeConverters
 {
     [Transformer(name: "tostring", requiresConfig: false)]
-    public class ToStringTransformer : IJTokenTransformer
+    public class ToStringTransformer : SinglyBoundTransformer
     {
-        private IJTokenTransformer _source;
+        protected override JToken TransformSingle(JToken root, TransformationContext ctx = null) =>
+            _source.Transform(root, ctx) switch
+            {
+                { Type: JTokenType.String } token => token,
+                { Type: JTokenType.Boolean } token => token.Value<bool>() ? "true" : "false",
+                {
+                    Type: JTokenType.Float
+                    or JTokenType.Integer
+                    or JTokenType.Guid
+                    or JTokenType.Uri
+                    or JTokenType.TimeSpan
+                    or JTokenType.Date
+                } token
+                => token.ToString(),
+                var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.String}")
+            };
 
-        public JToken Transform(JToken root, TransformationContext ctx = null)
-        {
-            var token = _source.Transform(root, ctx);
-
-            return token.ToString();
-        }
-
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-            => visitor.Visit(this);
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            _source = source ?? throw new ArgumentNullException(nameof(source));
-
-            return this;
-        }
+        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Primitive;
+        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.String;
     }
 }

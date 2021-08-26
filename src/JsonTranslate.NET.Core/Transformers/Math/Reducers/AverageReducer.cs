@@ -2,7 +2,7 @@
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTranslate.NET.Core.Transformers.MathReducers
+namespace JsonTranslate.NET.Core.Transformers.Math.Reducers
 {
     [Transformer(name: "average", requiresConfig: false)]
     public class AverageReducer : AbstractNumberReducer

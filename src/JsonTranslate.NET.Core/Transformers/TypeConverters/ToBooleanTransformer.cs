@@ -1,20 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
-using JsonTranslate.NET.Core.Exceptions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
+
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.TypeConverters
 {
     [Transformer(name: "toboolean", requiresConfig: false)]
-    public class ToBooleanTransformer : IJTokenTransformer
+    public sealed class ToBooleanTransformer : SinglyBoundTransformer
     {
-        private IJTokenTransformer _source;
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
-        {
-            var token = _source.Transform(root, ctx);
-            
-            return token switch
+        protected override JToken TransformSingle(JToken root, TransformationContext ctx = null) => 
+            _source.Transform(root, ctx) switch
             {
                 { Type: JTokenType.Boolean } x => x,
                 { Type: JTokenType.String } x => Convert.ToBoolean(x.Value<string>()),
@@ -23,18 +20,9 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
                 var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.Boolean}")
             };
 
-        }
+        public override IEnumerable<JTokenType> SupportedTypes =>
+            new[] { JTokenType.Boolean, JTokenType.String, JTokenType.Integer, JTokenType.Float };
 
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-            => visitor.Visit(this);
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            if (ReferenceEquals(this, source)) throw new TransformerBindingException("Cannot bind to self");
-            
-            _source = source ?? throw new TransformerBindingException("Cannot bind `null` as transformer"); // TODO
-
-            return this;
-        }
+        public override IEnumerable<JTokenType> SupportedResults => new[] { JTokenType.Boolean };
     }
 }

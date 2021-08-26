@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
-using JsonTranslate.NET.Core.Exceptions;
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using JsonTranslate.NET.Core.Transformers;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
@@ -72,7 +72,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         public void Unit_Does_Not_Allow_Bindings()
         {
             var sut = new UnitTransformer(new JObject { ["value"] = "valid" });
-            Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.TypeOf<NotSupportedException>());
+            Assert.That(() => sut.Bind(Substitute.For<IJTokenTransformer>()), Throws.TypeOf<ValueProvidersCannotBeBoundException>());
         }
     }
 }

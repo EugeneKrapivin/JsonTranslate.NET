@@ -1,57 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
-    [Transformer(TransformerName)]
-    public class KeyedTransformer : IJTokenTransformer
+    [Transformer("property")]
+    public class KeyedTransformer : TransformerBase
     {
         private IJTokenTransformer _keySelector;
 
         private IJTokenTransformer _valueSelector;
 
-        private readonly IJTokenTransformer[] _sources = new IJTokenTransformer[2];
-        public const string TransformerName = "keyed";
-        public string Name => TransformerName;
+        private readonly List<IJTokenTransformer> _sources = new(2);
 
-        public IJTokenTransformer Bind(IJTokenTransformer source)
+        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> SupportedResults => new[] {JTokenType.Property};
+        public override IEnumerable<IJTokenTransformer> Sources => _sources;
+
+        public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            EnsureSource(source);
 
             if (_keySelector == null)
             {
                 _keySelector = source;
-                _sources[0] = source;
             }
             else if (_valueSelector == null)
             {
                 _valueSelector = source;
-                _sources[1] = source;
             }
             else
             {
-                // TODO I could probably do better xD
-                throw new NotSupportedException();
+                throw new TransformerBindingException(); // TODO message
             }
+
+            _sources.Add(source);
+            
+            EnsureNoCycles();
 
             return this;
         }
 
-        public string SourceType { get; set; }
-        public string TargetType { get; set; }
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
+        public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            var key = _keySelector.Transform(root, ctx).Value<string>(); // tODO validate string
+            var key = _keySelector
+                .Transform(root, ctx)
+                .ValidateNonNull()
+                .ValidateType(JTokenType.String)
+                .Value<string>();
+            
             var value = _valueSelector.Transform(root, ctx);
 
             return new JProperty(key, value);
-        }
-
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-        {
-            return visitor.Visit(this);
         }
     }
 }

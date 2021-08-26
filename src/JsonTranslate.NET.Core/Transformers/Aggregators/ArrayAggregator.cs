@@ -2,38 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Aggregators
 {
     [Transformer(name: "toarray", requiresConfig: false)]
-    public class ArrayAggregator : IJTokenTransformer
+    public class ArrayAggregator : MultiBoundTransformer
     {
-        public string SourceType => "any";
-        public string TargetType => "array";
+        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+       
+        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
 
-        private readonly List<IJTokenTransformer> _sources = new();
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
-        {
-            var arr = new JArray();
-            foreach (var element in _sources.Select(source => source.Transform(root, ctx)).ToArray())
-            {
-                arr.Add(element);
-            }
-            return arr;
-        }
-
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-            => visitor.Visit(this);
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source), "can not bind null transformers");
-
-            _sources.Add(source);
-
-            return this;
-        }
+        public override JToken Transform(JToken root, TransformationContext ctx = null) =>
+            _sources
+                .Select(source => source.Transform(root, ctx))
+                .Aggregate(new JArray(), (array, token) =>
+                {
+                    array.Add(token);
+                    return array;
+                });
     }
 }

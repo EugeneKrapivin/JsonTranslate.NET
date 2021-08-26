@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
 {
     [Transformer(name: "lookup", requiresConfig: true)]
-    public class LookupTransformer : IJTokenTransformer
+    public class LookupTransformer : SinglyBoundTransformer
     {
-        static LookupTransformer()
-        {
-            TransformerFactory.RegisterTransformer<LookupTransformer>();
-        }
-
         private readonly LookupConfig _lookupConfig;
+
+        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        
+        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
 
         public LookupTransformer(JObject conf)
         {
@@ -23,18 +23,7 @@ namespace JsonTranslate.NET.Core.Transformers
             _lookupConfig = this.GetConfig<LookupConfig>(conf);
         }
 
-        private IJTokenTransformer _source;
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            if (_source != null) throw new NotSupportedException($"{nameof(LookupTransformer)} transformer doesn't allow multiple bindings");
-
-            _source = source ?? throw new ArgumentNullException($"{nameof(LookupTransformer)} transformer expects exactly 1 input");
-
-            return this;
-        }
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
+        protected override JToken TransformSingle(JToken root, TransformationContext ctx = null)
         {
             var value = _source.Transform(root, ctx);
 
@@ -59,9 +48,6 @@ namespace JsonTranslate.NET.Core.Transformers
                 return value != null;
             }
         }
-
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-            => visitor.Visit(this);
 
         public class LookupConfig
         {

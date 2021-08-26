@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("obj")]
-    public class ObjectTransformer : IJTokenTransformer
+    public class ObjectTransformer : MultiBoundTransformer
     {
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor) => visitor.Visit(this);
+        public override IEnumerable<JTokenType> SupportedTypes => new[] { JTokenType.Property };
+        
+        public override IEnumerable<JTokenType> SupportedResults => new[] { JTokenType.Object };
 
-        public string Name => "obj";
-
-        private readonly List<IJTokenTransformer> _sources = new();
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
+        public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
             if (source is KeyedTransformer)
             {
@@ -24,22 +23,19 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
             else
             {
                 throw new NotSupportedException(
-                    $"Transformer of type `{Name}` only supports bindings of type `{KeyedTransformer.TransformerName}`");
+                    $"Transformer of type `{nameof(ObjectTransformer)}` only supports bindings of type `{nameof(KeyedTransformer)}`");
             }
+
+            EnsureNoCycles();
 
             return this;
         }
 
-        public string SourceType { get; set; }
-        public string TargetType { get; set; }
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
+        public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
             var properties = _sources.Select(x => x.Transform(root, ctx)).ToArray();
 
-            // TODO: validate all properties are OK
-
-            return new JObject(properties); // TODO WARN
+            return new JObject(properties);
         }
     }
 }

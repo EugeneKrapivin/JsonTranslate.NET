@@ -1,5 +1,5 @@
 using JsonTranslate.NET.Core;
-using JsonTranslate.NET.Core.JsonDSL;
+using JsonTranslate.NET.Core.JsonDsl;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -1,51 +1,41 @@
 ﻿using System;
 using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
-    [Transformer(TransformerName)]
-    public class SelectTransformation : IJTokenTransformer
+    [Transformer("select")]
+    public class SelectTransformation : CollectionTransformer
     {
-        private const string TransformerName = "select";
-
-        private IJTokenTransformer _source;
-
         private IJTokenTransformer _projection;
 
-        public SelectTransformation()
-            : this(null)
+        public override IJTokenTransformer Bind(IJTokenTransformer source)
         {
+            EnsureSource(source);
 
-        }
-        
-        public SelectTransformation(JObject conf)
-        {
-
-        }
-
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-
-            if (_source == null)
+            if (_source is null)
             {
                 _source = source;
             }
-            else
+            else if (_predicate is null)
             {
                 _projection = source;
             }
+            else
+            {
+                throw new BadTransformerBindingException("Transformer expects exactly 2 bindings source and projection");
+            }
+            
+            _sources.Add(source);
+
+            EnsureNoCycles();
 
             return this;
         }
 
-        public string SourceType { get; set; }
-        
-        public string TargetType { get; set; }
-
-        public JToken Transform(JToken root, TransformationContext ctx = null)
+        public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
             var arrResult = _source.Transform(root); // select the array from the object root
 
@@ -57,7 +47,7 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
                 throw new Exception(); // TODO
             }
 
-            var obj = arr.Select(item => item.DeepClone()) // clone so that we don't change the current element for the whole tree
+            var obj = arr.Select(item => item.DeepClone())
                 .Select(item => _projection.Transform(root, new TransformationContext { Root = root, CurrentItem = item}))
                 .Aggregate(new JArray(), (o, token) =>
                 {
@@ -66,11 +56,6 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
                 });
 
             return obj;
-        }
-
-        public TR Accept<TR>(IVisitor<IJTokenTransformer, TR> visitor)
-        {
-            return visitor.Visit(this);
         }
     }
 }

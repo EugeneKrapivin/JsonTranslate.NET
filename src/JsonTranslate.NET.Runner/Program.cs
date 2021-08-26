@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using JsonTranslate.NET.Core;
-using JsonTranslate.NET.Core.JustDSL;
+using JsonTranslate.NET.Core.JustDsl;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
