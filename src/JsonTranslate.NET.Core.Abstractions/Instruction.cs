@@ -11,8 +11,6 @@ namespace JsonTranslate.NET.Core.Abstractions
 
         public List<Instruction> Bindings { get; set; }
 
-        public ISerializeDSL SerializeDsl { get; set; }
-
         public IJTokenTransformer BuildTransformationTree(ITransformerFactory factory)
         {
             var root = factory.GetTransformer(Name, Config);
@@ -24,10 +22,5 @@ namespace JsonTranslate.NET.Core.Abstractions
 
             return root;
         }
-
-        public override string ToString() 
-            => SerializeDsl != null 
-                ? SerializeDsl.ToString(this) 
-                : base.ToString();
     }
 }

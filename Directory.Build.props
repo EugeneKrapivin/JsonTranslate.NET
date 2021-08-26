@@ -1,6 +1,7 @@
 <Project>
   
   <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>9</LangVersion>
   </PropertyGroup>
 

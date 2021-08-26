@@ -1,22 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
+
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.TypeConverters
 {
     [Transformer(name: "tointeger", requiresConfig: false)]
-    public class ToIntegerTransformer : IJTokenTransformer
+    public class ToIntegerTransformer : SinglyBoundTransformer
     {
-        private IJTokenTransformer _source;
-        public string SourceType => "any";
-
-        public string TargetType => JTokenType.Integer.ToString();
-
-        public JToken Transform(JToken root)
-        {
-            var token = _source.Transform(root);
-
-            return token switch
+        protected override JToken TransformSingle(JToken root, TransformationContext ctx = null) => 
+            _source.Transform(root, ctx) switch
             {
                 { Type: JTokenType.Boolean } x => x.Value<bool>() ? 1 : 0,
                 { Type: JTokenType.String } x => Convert.ToInt32(x.Value<string>()),
@@ -24,13 +19,10 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
                 { Type: JTokenType.Float } x => Convert.ToInt32(x.Value<decimal>()),
                 var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.Integer}")
             };
-        }
 
-        public IJTokenTransformer Bind(IJTokenTransformer source)
-        {
-            _source = source ?? throw new ArgumentNullException(nameof(source));
+        public override IEnumerable<JTokenType> SupportedTypes =>
+            new[] {JTokenType.Boolean, JTokenType.String, JTokenType.Integer, JTokenType.Float};
 
-            return this;
-        }
+        public override IEnumerable<JTokenType> SupportedResults => new[] {JTokenType.Integer};
     }
 }

@@ -1,41 +1,28 @@
 ﻿using System;
 using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.Abstractions.Transformers;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
 {
     [Transformer(name: "valueof", requiresConfig: true)]
-    public class ValueOfTransformer : IJTokenTransformer
+    public class ValueOfTransformer : ValueProvidingTransformer
     {
-        static ValueOfTransformer()
-        {
-            TransformerFactory.RegisterTransformer<ValueOfTransformer>();
-        }
-
-        public string SourceType => "any";
-
-        public string TargetType => "any";
-
-        private readonly Config _config;
+        private readonly ValueOfTransformerConfig _valueOfTransformerConfig;
 
         public ValueOfTransformer(JObject conf)
         {
-            if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
-
-            _config = this.GetConfig<Config>(conf);
+            _valueOfTransformerConfig = conf == null 
+                    ? throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration")
+                    : this.GetConfig<ValueOfTransformerConfig>(conf);
         }
 
-        public IJTokenTransformer Bind(IJTokenTransformer source)
+        public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            throw new NotSupportedException();
+            return root.SelectToken(_valueOfTransformerConfig.Path);
         }
 
-        public JToken Transform(JToken root)
-        {
-            return root.SelectToken(_config.Path);
-        }
-
-        private class Config
+        public class ValueOfTransformerConfig
         {
             public string Path { get; set; }
         }

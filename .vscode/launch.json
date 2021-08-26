@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/JsonTranslate.NET.Runner/bin/Debug/net5.0/JsonTranslate.NET.Runner.dll",
+            "program": "${workspaceFolder}/src/JsonTranslate.NET.Runner/bin/Debug/net5.0/JsonTranslate.NET.Runner.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/JsonTranslate.NET.Runner",
+            "cwd": "${workspaceFolder}/src/JsonTranslate.NET.Runner",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

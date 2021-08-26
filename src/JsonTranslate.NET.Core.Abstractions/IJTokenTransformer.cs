@@ -1,14 +1,17 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Abstractions
 {
-    public interface IJTokenTransformer
+    public interface IJTokenTransformer : IAccepting<IJTokenTransformer>
     {
-        string SourceType { get; }
+        public IEnumerable<JTokenType> SupportedTypes { get; }
 
-        string TargetType { get; }
+        public IEnumerable<JTokenType> SupportedResults { get; }
 
-        JToken Transform(JToken root);
+        public IEnumerable<IJTokenTransformer> Sources { get; }
+
+        JToken Transform(JToken root, TransformationContext ctx = null);
 
         IJTokenTransformer Bind(IJTokenTransformer source);
     }
