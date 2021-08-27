@@ -9,9 +9,9 @@ namespace JsonTranslate.NET.Core.Transformers.Math.Reducers
     {
         protected abstract JToken Aggregate(JArray source);
 
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Array;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Array;
         
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Numeric;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Numeric;
 
         protected override JToken TransformSingle(JToken root, TransformationContext ctx = null)
         {

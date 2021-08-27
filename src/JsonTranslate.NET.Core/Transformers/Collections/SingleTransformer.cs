@@ -10,7 +10,7 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
     [Transformer("single")]
     public class SingleTransformer : CollectionTransformer
     {
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Any;
 
         public override JToken Transform(JToken root, TransformationContext ctx = null)
         {

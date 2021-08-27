@@ -12,8 +12,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
     {
         private readonly DeconstructTransformerConfig _config;
 
-        public override IEnumerable<JTokenType> SupportedTypes => new[] { JTokenType.Object };
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Array;
+        public override IEnumerable<JTokenType> InputTypes => new[] { JTokenType.Object };
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Array;
 
         public DeconstructTransformer() : this(default(JObject))
         {

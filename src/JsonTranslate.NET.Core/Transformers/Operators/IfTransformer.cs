@@ -20,9 +20,9 @@ namespace JsonTranslate.NET.Core.Transformers.Operators
 
         public override IEnumerable<IJTokenTransformer> Sources => _sources;
 
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
 
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Boolean;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Boolean;
 
 
 

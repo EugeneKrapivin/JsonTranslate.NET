@@ -5,9 +5,9 @@ namespace JsonTranslate.NET.Core.Abstractions
 {
     public interface IJTokenTransformer : IAccepting<IJTokenTransformer>
     {
-        public IEnumerable<JTokenType> SupportedTypes { get; }
+        public IEnumerable<JTokenType> InputTypes { get; }
 
-        public IEnumerable<JTokenType> SupportedResults { get; }
+        public IEnumerable<JTokenType> OutputTypes { get; }
 
         public IEnumerable<IJTokenTransformer> Sources { get; }
 

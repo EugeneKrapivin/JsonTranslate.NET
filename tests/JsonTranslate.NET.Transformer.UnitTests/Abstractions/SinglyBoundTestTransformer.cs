@@ -8,8 +8,8 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
 {
     internal class SinglyBoundTestTransformer : SinglyBoundTransformer
     {
-        public override IEnumerable<JTokenType> SupportedTypes => new[] { JTokenType.None };
-        public override IEnumerable<JTokenType> SupportedResults => SupportedTypes;
+        public override IEnumerable<JTokenType> InputTypes => new[] { JTokenType.None };
+        public override IEnumerable<JTokenType> OutputTypes => InputTypes;
 
         protected override JToken TransformSingle(JToken root, TransformationContext ctx = null)
         {

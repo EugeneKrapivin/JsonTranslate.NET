@@ -8,9 +8,9 @@ namespace JsonTranslate.NET.Core.Transformers.Operators
     [Transformer("eq")]
     public class EqualsOperator : AbstractBinOperator
     {
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Primitive;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Primitive;
 
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Primitive;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Primitive;
         
         protected override JToken Operate(JToken loper, JToken roper) => JToken.DeepEquals(loper, roper);
     }
@@ -23,9 +23,9 @@ namespace JsonTranslate.NET.Core.Transformers.Operators
 
     public abstract class NumericBinOperator : AbstractBinOperator
     {
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Numeric;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Numeric;
 
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Numeric;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Numeric;
 
         protected override JToken Operate(JToken loper, JToken roper)
         {

@@ -16,8 +16,8 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
         
         private List<IJTokenTransformer> _sources = new(3);
         
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
-        public override IEnumerable<JTokenType> SupportedResults => new[] {JTokenType.Object};
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> OutputTypes => new[] {JTokenType.Object};
         public override IEnumerable<IJTokenTransformer> Sources => _sources;
 
         public override IJTokenTransformer Bind(IJTokenTransformer source)

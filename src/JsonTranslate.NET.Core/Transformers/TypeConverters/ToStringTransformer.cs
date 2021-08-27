@@ -26,7 +26,7 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
                 var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.String}")
             };
 
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Primitive;
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.String;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Primitive;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.String;
     }
 }

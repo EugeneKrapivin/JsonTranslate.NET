@@ -20,9 +20,9 @@ namespace JsonTranslate.NET.Core.Transformers.TypeConverters
                 var x => throw new ArgumentOutOfRangeException(nameof(root), $"Can not handle type transformation from {x.Type} to {JTokenType.Boolean}")
             };
 
-        public override IEnumerable<JTokenType> SupportedTypes =>
+        public override IEnumerable<JTokenType> InputTypes =>
             new[] { JTokenType.Boolean, JTokenType.String, JTokenType.Integer, JTokenType.Float };
 
-        public override IEnumerable<JTokenType> SupportedResults => new[] { JTokenType.Boolean };
+        public override IEnumerable<JTokenType> OutputTypes => new[] { JTokenType.Boolean };
     }
 }

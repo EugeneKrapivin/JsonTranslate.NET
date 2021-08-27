@@ -10,9 +10,9 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
     [Transformer("obj")]
     public class ObjectTransformer : MultiBoundTransformer
     {
-        public override IEnumerable<JTokenType> SupportedTypes => new[] { JTokenType.Property };
+        public override IEnumerable<JTokenType> InputTypes => new[] { JTokenType.Property };
         
-        public override IEnumerable<JTokenType> SupportedResults => new[] { JTokenType.Object };
+        public override IEnumerable<JTokenType> OutputTypes => new[] { JTokenType.Object };
 
         public override IJTokenTransformer Bind(IJTokenTransformer source)
         {

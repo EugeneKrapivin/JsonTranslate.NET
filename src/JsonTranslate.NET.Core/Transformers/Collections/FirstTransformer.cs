@@ -9,7 +9,7 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
     [Transformer("first")]
     public class FirstTransformer : CollectionTransformer
     {
-        public override IEnumerable<JTokenType> SupportedResults => new[] {JTokenType.Integer};
+        public override IEnumerable<JTokenType> OutputTypes => new[] {JTokenType.Integer};
 
         public override JToken Transform(JToken root, TransformationContext ctx = null)
         {

@@ -9,9 +9,9 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
     [Transformer(name: "current", requiresConfig: true)]
     public class CurrentItemSelector : SinglyBoundTransformer
     {
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
         
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Any;
 
         protected override JToken TransformSingle(JToken root, TransformationContext ctx = null)
         {

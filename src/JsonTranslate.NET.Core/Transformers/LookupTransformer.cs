@@ -12,9 +12,10 @@ namespace JsonTranslate.NET.Core.Transformers
     {
         private readonly LookupConfig _lookupConfig;
 
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
         
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> OutputTypes
+            => JTokenTypeConstants.Any;
 
         public LookupTransformer(JObject conf)
         {

@@ -13,7 +13,7 @@ namespace JsonTranslate.NET.Core.Transformers.String.Operators
         
         private readonly List<IJTokenTransformer> _sources = new (2);
 
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.String;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.String;
 
         public override IEnumerable<IJTokenTransformer> Sources => _sources;
 
