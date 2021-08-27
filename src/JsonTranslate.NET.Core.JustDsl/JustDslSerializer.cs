@@ -5,9 +5,9 @@ using JsonTranslate.NET.Core.Abstractions;
 
 namespace JsonTranslate.NET.Core.JustDsl
 {
-    public class JustDslSerializer : ISerializeDSL
+    public class JustDslSerializer : ISerializeDsl
     {
-        public string ToString(Instruction instruction)
+        public string Serialize(Instruction instruction)
         {
             var sb = new StringBuilder();
 
@@ -29,7 +29,7 @@ namespace JsonTranslate.NET.Core.JustDsl
             return sb.ToString();
         }
 
-        public Instruction Parse(string dsl)
+        public Instruction Deserialize(string dsl)
         {
             var antlrStream = new AntlrInputStream(dsl);
             var lexer = new JustDslLexer(antlrStream);

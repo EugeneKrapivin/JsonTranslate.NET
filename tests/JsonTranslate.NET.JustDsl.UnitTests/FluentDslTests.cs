@@ -28,7 +28,7 @@ namespace JsonTranslate.NET.JustDsl.UnitTests
                 ["test"] = "look me up"
             };
             var serilizer = new JustDslSerializer();
-            var instruction = serilizer.Parse(str);
+            var instruction = serilizer.Deserialize(str);
             
             var transformerFactory = new TransformerFactory();
             var transformer = transformerFactory.BuildTransformationTree(instruction);

@@ -1,9 +1,9 @@
 ﻿namespace JsonTranslate.NET.Core.Abstractions
 {
-    public interface ISerializeDSL
+    public interface ISerializeDsl
     {
-        string ToString(Instruction instructions);
+        string Serialize(Instruction instructions);
         
-        Instruction Parse(string dsl);
+        Instruction Deserialize(string dsl);
     }
 }

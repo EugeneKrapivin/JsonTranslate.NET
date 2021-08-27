@@ -51,7 +51,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.DocumentationExamples
                 test = "look me up"
             });
 
-            var instruction = new JsonDslSerializer().Parse(recipe);
+            var instruction = new JsonDslSerializer().Deserialize(recipe);
 
             var factory = new TransformerFactory();
             var tree = factory.BuildTransformationTree(instruction);
