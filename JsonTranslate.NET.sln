@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Runner", "src\JsonTranslate.NET.Runner\JsonTranslate.NET.Runner.csproj", "{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Core", "src\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj", "{A060E28A-B91B-474B-8B0B-3B678D65AD7A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A}
@@ -24,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		LICENSE = LICENSE
+		nuget.config = nuget.config
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -31,11 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9486E3A5-AB7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{42D7EA7A-D561-4098-BACB-F5FC9CDDA475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTranslate.NET.Transformer.UnitTests", "tests\JsonTranslate.NET.Transformer.UnitTests\JsonTranslate.NET.Transformer.UnitTests.csproj", "{1DA0A31A-6DCB-4FC4-905C-6C15A5CD7832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.Transformer.UnitTests", "tests\JsonTranslate.NET.Transformer.UnitTests\JsonTranslate.NET.Transformer.UnitTests.csproj", "{1DA0A31A-6DCB-4FC4-905C-6C15A5CD7832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTranslate.NET.JsonDsl.UnitTests", "tests\JsonTranslate.NET.JsonDsl.UnitTests\JsonTranslate.NET.JsonDsl.UnitTests.csproj", "{FCB4F5E0-0D49-42F7-87EC-ADB2F0FFC715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.JsonDsl.UnitTests", "tests\JsonTranslate.NET.JsonDsl.UnitTests\JsonTranslate.NET.JsonDsl.UnitTests.csproj", "{FCB4F5E0-0D49-42F7-87EC-ADB2F0FFC715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTranslate.NET.JustDsl.UnitTests", "tests\JsonTranslate.NET.JustDsl.UnitTests\JsonTranslate.NET.JustDsl.UnitTests.csproj", "{8E160573-53AD-4F08-98CB-ADB235C43B51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.JustDsl.UnitTests", "tests\JsonTranslate.NET.JustDsl.UnitTests\JsonTranslate.NET.JustDsl.UnitTests.csproj", "{8E160573-53AD-4F08-98CB-ADB235C43B51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +42,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A060E28A-B91B-474B-8B0B-3B678D65AD7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A060E28A-B91B-474B-8B0B-3B678D65AD7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A060E28A-B91B-474B-8B0B-3B678D65AD7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,7 +75,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8D31DDB4-B775-4F8B-9C6E-5A88021A207D} = {9486E3A5-AB73-4A49-825C-24B95F616931}
 		{A060E28A-B91B-474B-8B0B-3B678D65AD7A} = {9486E3A5-AB73-4A49-825C-24B95F616931}
 		{1BDEB1DC-FEC2-490B-8595-27F5C8579BBE} = {9486E3A5-AB73-4A49-825C-24B95F616931}
 		{AD7B274E-C1B4-4D1B-A2ED-4EEE9BDA811A} = {9486E3A5-AB73-4A49-825C-24B95F616931}

@@ -42,7 +42,7 @@ namespace JsonTranslate.NET.Runner
                     Formatting = Formatting.Indented
                 }));
                 
-                s.Value = t.BuildTransformationTree(transformerFactory).Transform(source);
+                s.Value = transformerFactory.BuildTransformationTree(t).Transform(source);
             }
 
             Console.WriteLine(template.ToString(Formatting.Indented));

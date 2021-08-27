@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Abstractions
 {
-    public class Instruction
+    public class Instruction : IAccepting<Instruction>
     {
         public string Name { get; set; }
 
@@ -11,16 +11,11 @@ namespace JsonTranslate.NET.Core.Abstractions
 
         public List<Instruction> Bindings { get; set; }
 
-        public IJTokenTransformer BuildTransformationTree(ITransformerFactory factory)
+        public void Deconstruct(out string name, out JObject config, out IReadOnlyCollection<Instruction> bindings)
         {
-            var root = factory.GetTransformer(Name, Config);
-
-            foreach (var binding in Bindings ?? new List<Instruction>())
-            {
-                root.Bind(binding.BuildTransformationTree(factory));
-            }
-
-            return root;
+            name = Name;
+            config = Config;
+            bindings = Bindings;
         }
     }
 }

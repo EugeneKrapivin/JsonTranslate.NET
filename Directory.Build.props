@@ -1,8 +1,19 @@
 <Project>
-  
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>9</LangVersion>
-  </PropertyGroup>
-
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Version>0.0.1</Version>
+		<Authors>Eugene Krapivin</Authors>
+		<Product>JsonTranslate.NET</Product>
+		<Description>JsonTranslate.NET library built on top of the successful Newtonsoft Json.NET aims to allow JSON data transformations using an easily serializable DSL (Json and Fluent).</Description>
+		<Copyright>Eugene Krapivin</Copyright>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageProjectUrl>https://github.com/EugeneKrapivin/JsonTranslate.NET</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/EugeneKrapivin/JsonTranslate.NET.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>json, xslt, transformation</PackageTags>
+	</PropertyGroup>
 </Project>

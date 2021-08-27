@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj" />
-    <ProjectReference Include="..\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
-    <ProjectReference Include="..\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDsl.csproj" />
-    <ProjectReference Include="..\JsonTranslate.NET.Core.JsonDsl\JsonTranslate.NET.Core.JsonDsl.csproj" />
-    
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj" />
+		<ProjectReference Include="..\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
+		<ProjectReference Include="..\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDsl.csproj" />
+		<ProjectReference Include="..\JsonTranslate.NET.Core.JsonDsl\JsonTranslate.NET.Core.JsonDsl.csproj" />
+
+	</ItemGroup>
 
 </Project>

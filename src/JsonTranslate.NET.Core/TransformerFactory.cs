@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using JsonTranslate.NET.Core.Abstractions;
@@ -7,99 +9,139 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core
 {
+    [ExcludeFromCodeCoverage]
     public sealed class TransformerFactory : ITransformerFactory
     {
-        private static readonly ConcurrentDictionary<string, (TypeInfo type, TransformerAttribute attr)> _transformers =
+        private readonly ConcurrentDictionary<string, (TypeInfo type, TransformerAttribute attr)> _transformers =
             new();
 
-        static TransformerFactory()
+        public TransformerFactory(bool scan = true)
         {
-            var types =
-                from type in Assembly.GetAssembly(typeof(TransformerFactory)).DefinedTypes
-                let attr = type.GetCustomAttribute<TransformerAttribute>()
-                where type.ImplementedInterfaces.Any(x => x == typeof(IJTokenTransformer))
-                    && attr is not null
-                select (type, attr);
+            if (!scan) return;
 
-            foreach (var type in types)
-            {
-                RegisterTransformer(type);
-            }
+            var asmTypes = Assembly.GetAssembly(typeof(TransformerFactory)).DefinedTypes;
+
+            RegisterTypes(asmTypes);
         }
 
-        public static void RegisterTransformer<T>()
+        public TransformerFactory(Type assemblyContainingType)
         {
-            var (type, attr) = ValidateType(typeof(T).GetTypeInfo());
+            if (assemblyContainingType == null) throw new ArgumentNullException(nameof(assemblyContainingType));
 
-            RegisterInternal(type, attr);
+            var asmTypes = Assembly.GetAssembly(assemblyContainingType).DefinedTypes;
+
+            RegisterTypes(asmTypes);
         }
 
-        public static void RegisterTransformer((TypeInfo type, TransformerAttribute attr) _)
+        public TransformerFactory(Assembly assembly)
         {
-            var (type, attr) = _;
+            if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 
-            ValidateType(type);
+            var asmTypes = assembly.DefinedTypes;
 
-            RegisterInternal(type, attr);
+            RegisterTypes(asmTypes);
         }
 
-        private static (TypeInfo type, TransformerAttribute attr) ValidateType(TypeInfo type)
+        public TransformerFactory(params TypeInfo[] transformerTypes)
         {
-            if (!ImplementsInterface(type.GetTypeInfo()))
-                throw new ArgumentException($"{type.Name} should implement {nameof(IJTokenTransformer)} and ");
-
-            var attr = GetTransformerAttribute(type);
-            if (attr == null)
-                throw new ArgumentException(
-                    $"type {type.Name} must be decorated with an attribute of type {nameof(TransformerAttribute)}");
-
-            return (type, attr);
+            RegisterTypes(transformerTypes);
         }
 
-        private static bool ImplementsInterface(TypeInfo type)
-        {
-            return typeof(IJTokenTransformer).IsAssignableFrom(type);
-        }
-
-        private static TransformerAttribute GetTransformerAttribute(Type type)
-            => type.GetCustomAttribute<TransformerAttribute>();
-
-        private static void RegisterInternal(TypeInfo type, TransformerAttribute decorator)
-        {
-            _transformers.TryAdd(decorator.Name, (type, decorator));
-        }
-
-        public IJTokenTransformer GetTransformer(string name, JObject conf = null)
+        public IJTokenTransformer GetTransformerInstance(string name, JObject conf = null)
         {
             if (!_transformers.TryGetValue(name, out var value))
             {
-                throw new Exception("bummer mate, nothing found");
+                throw new Exception();
             }
 
-            var (type, decorator) = value;
+            var (type, _) = value;
 
-            if (decorator.RequiresConfig)
-            {
-                if (conf == null)
-                    throw new ArgumentNullException(nameof(conf),
-                        $"transformer of type {decorator.Name} requires config");
-
-                return Activator.CreateInstance(type, conf) as IJTokenTransformer;
-            }
-
-            return Activator.CreateInstance(type) as IJTokenTransformer;
+            return Activator.CreateInstance(type, conf) as IJTokenTransformer;
         }
 
-        public TypeInfo RemoveTransformer(string name) =>
-            _transformers.TryRemove(name, out var pair) 
-                ? pair.type 
-                : null;
+        public TypeInfo RemoveTransformer(string name)
+        {
+            return _transformers.TryRemove(name, out var pair)
+                ? pair.type
+                : throw new Exception();
+        }
 
         public ITransformerFactory AddTransformer<T>() where T : IJTokenTransformer
         {
             RegisterTransformer<T>();
 
             return this;
+        }
+
+        public IJTokenTransformer BuildTransformationTree(Instruction instruction) =>
+            (instruction as IAccepting<Instruction>)
+            .Accept(new TransformationBuildingVisitor(this));
+
+        private void RegisterTypes(IEnumerable<TypeInfo> types)
+        {
+            foreach (var (type, attr) in FilterTransformerTypes(types))
+            {
+                RegisterInternal(type, attr);
+            }
+        }
+
+        private void RegisterTransformer<T>()
+        {
+            var (type, attr) = ValidateType(typeof(T).GetTypeInfo());
+
+            RegisterInternal(type, attr);
+        }
+
+        private void RegisterInternal(TypeInfo type, TransformerAttribute decorator)
+        {
+            _transformers.TryAdd(decorator.Name, (type, decorator));
+        }
+
+        private static IEnumerable<(TypeInfo type, TransformerAttribute attr)> FilterTransformerTypes(IEnumerable<TypeInfo> types) =>
+            from type in types
+            let attr = type.GetCustomAttribute<TransformerAttribute>()
+            where type.ImplementedInterfaces.Any(x => x == typeof(IJTokenTransformer))
+                  && attr is not null
+            select (type, attr);
+
+        private static (TypeInfo type, TransformerAttribute attr) ValidateType(TypeInfo type)
+        {
+            var attr = GetTransformerAttribute(type);
+            if (attr == null)
+            {
+                throw new Exception();
+            }
+
+            return (type, attr);
+        }
+
+        private static TransformerAttribute GetTransformerAttribute(Type type)
+        {
+            return type.GetCustomAttribute<TransformerAttribute>();
+        }
+
+        private class TransformationBuildingVisitor : IVisitor<Instruction, IJTokenTransformer>
+        {
+            private readonly ITransformerFactory _factory;
+
+            public TransformationBuildingVisitor(ITransformerFactory factory)
+            {
+                _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            }
+
+            public IJTokenTransformer Visit(Instruction target)
+            {
+                var (name, config, bindings) = target;
+
+                var root = _factory.GetTransformerInstance(name, config);
+
+                foreach (IAccepting<Instruction> binding in bindings ?? Enumerable.Empty<Instruction>())
+                {
+                    root.Bind(binding.Accept(this));
+                }
+
+                return root;
+            }
         }
     }
 }

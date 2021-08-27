@@ -1,23 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using JsonTranslate.NET.Core;
 using JsonTranslate.NET.Core.JsonDsl;
-using NUnit.Framework;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
-namespace JsonTranslate.NET.JustDsl.UnitTests
+namespace JsonTranslate.NET.Transformer.UnitTests.DocumentationExamples
 {
-    public class Tests
+    [TestFixture]
+    public class ExampleUnitTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        [Category("examples")]
-        public void Complex_StrJoin_With_LookUp()
+        public void String_Join_With_LookUp()
         {
-            var str = 
-@"{
+            var recipe = @"{
   ""name"": ""str_join"",
   ""config"": { ""separator"": "" "" },
   ""bindings"": [
@@ -47,17 +46,16 @@ namespace JsonTranslate.NET.JustDsl.UnitTests
   ]
 }";
 
-            var sourceJson = new JObject
+            var input = JObject.FromObject(new
             {
-                ["test"] = "look me up"
-            };
-            var serilizer = new JsonDslSerializer();
-            var instruction = serilizer.Parse(str);
-            
-            var transformerFactory = new TransformerFactory();
-            var transformer = instruction.BuildTransformationTree(transformerFactory);
+                test = "look me up"
+            });
 
-            var result = transformer.Transform(sourceJson, null);
+            var instruction = new JsonDslSerializer().Parse(recipe);
+
+            var factory = new TransformerFactory();
+            var tree = factory.BuildTransformationTree(instruction);
+
         }
     }
 }

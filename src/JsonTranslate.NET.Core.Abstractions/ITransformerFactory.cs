@@ -5,7 +5,7 @@ namespace JsonTranslate.NET.Core.Abstractions
 {
     public interface ITransformerFactory
     {
-        IJTokenTransformer GetTransformer(string name, JObject conf = null);
+        IJTokenTransformer GetTransformerInstance(string name, JObject conf = null);
 
         TypeInfo RemoveTransformer(string name);
 

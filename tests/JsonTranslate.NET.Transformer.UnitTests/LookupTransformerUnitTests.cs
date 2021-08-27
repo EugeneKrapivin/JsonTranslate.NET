@@ -17,7 +17,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             var config = new LookupTransformer.LookupConfig
             {
-                Lookup = new() {new(JToken.FromObject(source), JToken.FromObject(target))}
+                Map = new() {new(JToken.FromObject(source), JToken.FromObject(target))}
             };
 
             var substitute = Substitute.For<IJTokenTransformer>();
@@ -37,7 +37,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             var config = new LookupTransformer.LookupConfig()
             {
-                Lookup = new() { new("this", "not it") },
+                Map = new() { new("this", "not it") },
                 Default = JToken.FromObject(defaultValue),
                 OnMissing = LookupTransformer.LookupConfig.HandleMissing.Default
             };
@@ -59,7 +59,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             var config = new LookupTransformer.LookupConfig
             {
-                Lookup = new() { new("this", "not it") },
+                Map = new() { new("this", "not it") },
                 Default = "THIS IS DEFAULT VALUE",
                 OnMissing = LookupTransformer.LookupConfig.HandleMissing.Value
             };
@@ -93,7 +93,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             var config = new LookupTransformer.LookupConfig
             {
-                Lookup = new() { new("this", "not it") },
+                Map = new() { new("this", "not it") },
                 Default = "THIS IS DEFAULT VALUE",
                 OnMissing = LookupTransformer.LookupConfig.HandleMissing.Value
             };
@@ -109,7 +109,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             var config = new LookupTransformer.LookupConfig
             {
-                Lookup = new() { new("this", "not it") },
+                Map = new() { new("this", "not it") },
                 Default = "THIS IS DEFAULT VALUE",
                 OnMissing = LookupTransformer.LookupConfig.HandleMissing.Value
             };

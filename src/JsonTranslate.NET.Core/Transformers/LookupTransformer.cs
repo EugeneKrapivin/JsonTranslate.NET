@@ -28,7 +28,7 @@ namespace JsonTranslate.NET.Core.Transformers
         {
             var value = _source.Transform(root, ctx);
 
-            if (!TryFind(_lookupConfig.Lookup, value, out var lookUpResult))
+            if (!TryFind(_lookupConfig.Map, value, out var lookUpResult))
             {
                 if (_lookupConfig.OnMissing == LookupConfig.HandleMissing.Value)
                 {
@@ -52,7 +52,7 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public class LookupConfig
         {
-            public List<KeyValuePair<JToken, JToken>> Lookup { get; set; } = new();
+            public List<KeyValuePair<JToken, JToken>> Map { get; set; } = new();
 
             public HandleMissing OnMissing { get; set; } = HandleMissing.Value;
 

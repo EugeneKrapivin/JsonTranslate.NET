@@ -9,9 +9,9 @@ namespace JsonTranslate.NET.Core.Transformers.Aggregators
     [Transformer(name: "toarray", requiresConfig: false)]
     public class ArrayAggregator : MultiBoundTransformer
     {
-        public override IEnumerable<JTokenType> SupportedTypes => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
        
-        public override IEnumerable<JTokenType> SupportedResults => JTokenTypeConstants.Any;
+        public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Any;
 
         public override JToken Transform(JToken root, TransformationContext ctx = null) =>
             _sources
