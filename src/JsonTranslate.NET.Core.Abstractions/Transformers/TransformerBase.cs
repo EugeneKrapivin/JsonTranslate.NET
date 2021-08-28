@@ -11,6 +11,8 @@ namespace JsonTranslate.NET.Core.Abstractions.Transformers
     {
         public abstract IJTokenTransformer Bind(IJTokenTransformer source);
 
+        public virtual JObject Config => null;
+
         public virtual IEnumerable<JTokenType> InputTypes => Enumerable.Empty<JTokenType>();
 
         public virtual IEnumerable<JTokenType> OutputTypes => Enumerable.Empty<JTokenType>();

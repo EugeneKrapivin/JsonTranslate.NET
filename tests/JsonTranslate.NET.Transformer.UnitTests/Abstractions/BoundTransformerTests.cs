@@ -1,10 +1,26 @@
-﻿using JsonTranslate.NET.Core.Abstractions;
+﻿using System;
+using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using NUnit.Framework;
 using static JsonTranslate.NET.Transformer.UnitTests.Abstractions.TransformerCreationHelpers;
 
 namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
 {
+    [TestFixtureSource(typeof(TransformersGenericSources), nameof(TransformersGenericSources.ConfigurableTransformers))]
+    public class ConfigurableTransformer<T>
+        where T : IJTokenTransformer
+    {
+        [Test]
+        public void PrintEm()
+        {
+            var t = GetTransformer<T>();
+
+            Console.WriteLine(t.GetType().Name);
+
+            Assert.Pass();
+        }
+    }
+
     [TestFixture(typeof(SinglyBoundTestTransformer))]
     [TestFixture(typeof(MultiBoundTestTransformer))]
     [TestFixtureSource(typeof(TransformersGenericSources), nameof(TransformersGenericSources.BoundTransformers))]

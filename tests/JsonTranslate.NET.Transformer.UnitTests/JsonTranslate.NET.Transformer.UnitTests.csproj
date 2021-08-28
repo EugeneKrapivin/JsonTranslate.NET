@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\JsonTranslate.NET.Core.JsonDsl\JsonTranslate.NET.Core.JsonDsl.csproj" />
+		<ProjectReference Include="..\..\src\JsonTranslate.NET.Core.JustDsl\JsonTranslate.NET.Core.JustDsl.csproj" />
 		<ProjectReference Include="..\..\src\JsonTranslate.NET.Core\JsonTranslate.NET.Core.csproj" />
 	</ItemGroup>
 

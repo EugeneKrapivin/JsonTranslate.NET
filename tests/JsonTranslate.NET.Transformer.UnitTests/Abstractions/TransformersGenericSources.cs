@@ -72,5 +72,24 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
                 return list;
             }
         }
+
+        public static IEnumerable<Type> ConfigurableTransformers
+        {
+            get
+            {
+                var types = Assembly.GetAssembly(typeof(TransformerFactory)).DefinedTypes;
+                var list = types
+                    .Where(type =>
+                    {
+                        var attr = type.GetCustomAttribute<TransformerAttribute>();
+                        return attr?.RequiresConfig == true;
+                    })
+                    .Where(x => x.ImplementedInterfaces.Any(iface => iface == typeof(IJTokenTransformer)))
+                    .Where(x => !x.IsAbstract)
+                    .ToList();
+
+                return list;
+            }
+        }
     }
 }

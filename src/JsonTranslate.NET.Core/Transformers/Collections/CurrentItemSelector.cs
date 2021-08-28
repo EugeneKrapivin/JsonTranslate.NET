@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
-    [Transformer(name: "current", requiresConfig: true)]
+    [Transformer(name: "current")]
     public class CurrentItemSelector : SinglyBoundTransformer
     {
         public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;

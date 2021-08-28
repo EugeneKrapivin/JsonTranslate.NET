@@ -46,7 +46,7 @@ namespace JsonTranslate.NET.JsonDsl.UnitTests
                 ["test"] = "look me up"
             };
 
-            var instruction = new JsonDslSerializer().Parse(recipe);
+            var instruction = new JsonDslSerializer().Deserialize(recipe);
 
             var transformerFactory = new TransformerFactory();
             var transformer = transformerFactory.BuildTransformationTree(instruction);

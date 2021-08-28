@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
+using JsonTranslate.NET.Core.Abstractions;
+using JsonTranslate.NET.Core.JustDsl;
 using JsonTranslate.NET.Core.Transformers;
 using JsonTranslate.NET.Core.Transformers.Collections;
 using JsonTranslate.NET.Core.Transformers.String.Reducers;
@@ -118,6 +122,20 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
 
             Assert.That(JToken.DeepEquals(expected, actual));
 
+            Console.WriteLine(
+            new JustDslSerializer().Serialize(root.Accept(new ToInstructionVisitor())));
+
+        }
+
+        private class ToInstructionVisitor : IVisitor<IJTokenTransformer, Instruction>
+        {
+            public Instruction Visit(IJTokenTransformer target) =>
+                new Instruction
+                {
+                    Name = target.GetType().GetCustomAttribute<TransformerAttribute>()?.Name,
+                    Config = target.Config,
+                    Bindings = target.Sources.Select(source => source.Accept(this)).ToList()
+                };
         }
     }
 }

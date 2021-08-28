@@ -18,7 +18,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
         public static TTarget GetTransformer<TTarget>() =>
             typeof(TTarget).Name switch
             {
-                nameof(ValueProvidingTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget), new JObject {["path"] = "$"}),
+                nameof(ValueOfTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget), new JObject {["path"] = "$"}),
                 nameof(UnitTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget), new JObject {["value"] = "$"}),
                 nameof(LookupTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget), JObject.FromObject(new LookupTransformer.LookupConfig())),
                 nameof(StringJoinAggregator) => (TTarget)Activator.CreateInstance(typeof(TTarget), JObject.FromObject(new StringJoinAggregator.StringJoinAggregatorConfig())),

@@ -3,6 +3,87 @@
 library provides the ability to translate JSONs into other JSONs by using a DSL. 
 Based on ideas inspired by [JUST.net](https://github.com/WorkMaze/JUST.net) library by WorkMaze.
 
+## Quick start
+
+### Installation
+
+1. Install the nugets into your target project  
+1.1. `JsonTranslate.NET.Core` - core logic, contains the transformer implementations, 
+factory and visitors  
+1.2. `JsonTranslate.NET.Core.JsonDsl` - a skinny wrapper (5 lines of code really) to 
+wrap serialization and deserialization of [the Instruction](#The-Instruction) into
+JSON format.  
+1.3. `JsonTranslate.NET.Core.FluentDsl` - a DSL allowing concise serialization and
+deserialization operations into a format akin to the [JUST.net library](https://github.com/WorkMaze/JUST.net).   
+
+### Example
+
+Given a source JSON:
+```json
+{
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "+1-555-5551"
+    },
+    {
+      "type": "work",
+      "number": "+1-555-5552"
+    }
+  ],
+  "addresses": [
+    {
+      "type": "home",
+      "city": "New-York",
+      "street1": "1st Ave 1",
+      "street2": "Apt 11",
+      "country": "USA"
+    },
+    {
+      "type": "work",
+      "city": "New-York",
+      "street1": "1st Ave 2",
+      "street2": "floor 100",
+      "country": "USA"
+    }
+  ]
+}
+```
+
+You'd like to transform it into the following JSON:
+
+```json
+{
+  "phoneNumbers": {
+    "home": "+1-555-5551",
+    "work": "+1-555-5552"
+  },
+  "addrs": {
+    "home": {
+      "city": "New-York",
+      "country": "USA",
+      "street": "1st Ave 1, Apt 11"
+    },
+    "work": {
+      "city": "New-York",
+      "country": "USA",
+      "street": "1st Ave 2, floor 100"
+    }
+  }
+}
+```
+
+You can always approach it programmatically and write specialized code to acheive 
+this goal. However, this may not be the best scalable solution, especially if the
+data is unstructured.
+
+Given a recipe:
+
+```code
+implement the config property on all config requiring transformers
+
+```
+
 ## Usage
 
 The library is intended to be integrated using 2 built-in 
