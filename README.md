@@ -1,3 +1,5 @@
+[![.NET](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/dotnet.yml)
+
 # JsonTranslate.NET
 
 > **Note**: This library is a work in progress and should probably not be used in any
