@@ -9,17 +9,27 @@ IDENTIFIER
     : [a-zA-Z] [a-zA-Z\-_] *
     ;
 
+start : func EOF ;
+
 func
-	: FUNCTION_START IDENTIFIER LPAREN (config?) (argumentList?) RPAREN
+    : FUNCTION_START IDENTIFIER LPAREN parameter_list? RPAREN
     ;
 
 argument
    : func
    ;
 
-argumentList
-   : (ARG_SEPARATOR argument)+
-   | ARG_SEPARATOR? argument
+parameter_list
+   : (config argument_list)?
+   | no_config_parameter_list?
+   ;
+
+argument_list
+   : (ARG_SEPARATOR argument)*
+   ;
+
+no_config_parameter_list
+   : argument (ARG_SEPARATOR argument)*
    ;
 
 config

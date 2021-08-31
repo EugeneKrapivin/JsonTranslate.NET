@@ -42,7 +42,6 @@ namespace JsonTranslate.NET.JustDsl.UnitTests
 
         [Test]
         [Category("examples")]
-        [Ignore("bug in antlr parser, issue #4")]
         public void Parse_From_String_And_Successfully_Execute()
         {
             var source = JObject.Parse("{\"phone_numbers\":[{\"type\":\"home\",\"number\":\"+1-555-5551\"},{\"type\":\"work\",\"number\":\"+1-555-5552\"}],\"addresses\":[{\"type\":\"home\",\"city\":\"New-York\",\"street1\":\"1st Ave 1\",\"street2\":\"Apt 11\",\"country\":\"USA\"},{\"type\":\"work\",\"city\":\"New-York\",\"street1\":\"1st Ave 2\",\"street2\":\"floor 100\",\"country\":\"USA\"}]}");

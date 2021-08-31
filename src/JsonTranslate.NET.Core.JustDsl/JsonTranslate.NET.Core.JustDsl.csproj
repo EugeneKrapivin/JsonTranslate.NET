@@ -9,13 +9,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Antlr4.CodeGenerator " Version="*" />
-		<PackageReference Include="Antlr4.Runtime" Version="*" />
-		<PackageReference Include="Antlr4" Version="*">
+		<PackageReference Include="Antlr4.CodeGenerator " Version="4.6.6" />
+		<PackageReference Include="Antlr4.Runtime" Version="4.6.6" />
+		<PackageReference Include="Antlr4" Version="4.6.6">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+	<!--<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.0" />
+		<PackageReference Include="Antlr4BuildTasks" Version="8.12">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Antlr4" Version="4.6.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>-->
+
+	<!--<ItemGroup>
+		<Antlr4 Include="JustDsl.g4">
+			<Visitor>true</Visitor>
+			<Error>true</Error>
+		</Antlr4>
+	</ItemGroup>-->
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>3021;1701;1702</NoWarn>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="..\..\LICENSE">

@@ -8,18 +8,36 @@ namespace JsonTranslate.NET.Core.JustDsl
 {
     public class DslVisitor : JustDslBaseVisitor<Instruction>
     {
+        public override Instruction VisitStart(JustDslParser.StartContext context)
+        {
+            return context.func().Accept(this);
+        }
+
         public override Instruction VisitFunc(JustDslParser.FuncContext context)
         {
             var name = context.IDENTIFIER().GetText();
+            var @params = context.parameter_list();
 
-            var conf = context.config()?.GetText();
-            var arguments = context.argumentList()?.argument() ?? Array.Empty<JustDslParser.ArgumentContext>();
+            JustDslParser.ConfigContext configCtx = null;
+            JustDslParser.ArgumentContext[] argumentContexts;
 
+            if (@params.config() == null)
+            {
+                argumentContexts = @params.no_config_parameter_list()?.argument() ??
+                               Array.Empty<JustDslParser.ArgumentContext>();
+            }
+            else
+            {
+                configCtx = @params.config();
+                argumentContexts = @params.argument_list()?.argument() ??
+                               Array.Empty<JustDslParser.ArgumentContext>();
+            }
+            
             var instruction = new Instruction
             {
                 Name = name,
-                Config = conf == null ? null : JObject.Parse(conf),
-                Bindings = arguments.Select(x => x.Accept(this)).ToList()
+                Config = configCtx == null ? null : JObject.Parse(configCtx.GetText()),
+                Bindings = argumentContexts.Select(x => x.Accept(this)).ToList()
             };
 
             return instruction;
