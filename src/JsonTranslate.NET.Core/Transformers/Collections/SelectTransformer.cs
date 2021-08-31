@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("select")]
-    public class SelectTransformer : CollectionTransformer
+    public class SelectTransformer : AbstractCollectionTransformer
     {
         private IJTokenTransformer _projection;
 

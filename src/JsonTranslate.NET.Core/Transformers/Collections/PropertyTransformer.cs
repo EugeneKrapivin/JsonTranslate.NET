@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("property")]
-    public class KeyedTransformer : TransformerBase
+    public class PropertyTransformer : TransformerBase
     {
         private IJTokenTransformer _keySelector;
 

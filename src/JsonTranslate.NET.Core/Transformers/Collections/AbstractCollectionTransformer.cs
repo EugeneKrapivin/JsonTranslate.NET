@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
-    public abstract class CollectionTransformer : TransformerBase
+    public abstract class AbstractCollectionTransformer : TransformerBase
     {
         protected IJTokenTransformer _predicate;
         protected IJTokenTransformer _source;

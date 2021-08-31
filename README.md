@@ -1,5 +1,8 @@
 # JsonTranslate.NET
 
+> **Note**: This library is a work in progress and should probably not be used in any
+> production scenarios. Questions, proposals (pull requests) and bugs are very welcome :)
+
 library provides the ability to translate JSONs into other JSONs by using a DSL. 
 Based on ideas inspired by [JUST.net](https://github.com/WorkMaze/JUST.net) library by WorkMaze.
 
@@ -75,12 +78,49 @@ You'd like to transform it into the following JSON:
 
 You can always approach it programmatically and write specialized code to acheive 
 this goal. However, this may not be the best scalable solution, especially if the
-data is unstructured.
+data is unstructured or there are multiple data formats owned by different tenants.
 
 Given a recipe:
 
+
+> WORK IN PROGRESS
 ```code
-implement the config property on all config requiring transformers
+#toobj(
+    #property(
+        #unit({"value":"phoneNumbers"}), 
+        #toobj(
+            #valueof({"path":"$.phone_numbers"}), 
+            #current(
+                #valueof({"path":"$.type"})), 
+                #current(#valueof({"path":"$.number"})))), 
+    #property(
+        #unit({"value":"addrs"}), 
+        #toobj(
+            #valueof({"path":"$.addresses"}), 
+            #current(
+                #valueof({"path":"$.type"})), 
+            #current(
+                #toobj(
+                    #property(
+                        #unit({"value":"city"}), 
+                        #valueof({"path":"$.city"})), 
+                    #property(
+                        #unit({"value":"country"}), 
+                        #valueof({"path":"$.country"})), 
+                    #property(
+                        #unit({"value":"street"}), 
+                        #str_join({"separator":", "}, 
+                            #valueof({"path":"$.street1"}), 
+                            #valueof({"path":"$.street2"}))))))))
+
+```
+
+with the following code:
+
+> WORK IN PROGRESS
+```csharp
+
+// TBD
 
 ```
 
@@ -112,7 +152,7 @@ in the transformer factory. The name should not change as it constitutes a break
 change.
 
 > Note: a planned feature will allow to alias transformers so that breaking changes are
-> gradual.
+> in naming is gradual.
 
 #### Config
 
@@ -312,16 +352,271 @@ and the noted about example, when running the
 
 ### "JUST" inspired DSL
 
+The `JUST` inspired DSL is less verbose than the JSON DSL. However, it is also less
+humanly readable and probably a bit harder for construction in the front end since it 
+requires the frontend to know the DSL in order to build an expression.
+
+A structure of an expression is recuresive
+
+```
+#<operator> (<json config>? [, #<operator>]*)
+```
+
+> Note: some grammar definitions are removed for brevity.
+
+Notice that this DSL is capble of expression all that the JSON DSL can, 
+and vise-a-versa. They are designed to be compatible. As a general use case, it is 
+possible that you'd want to receive the JSON DSL from the front-end and store it in the 
+database using the JUST DSL to save space.
+
 ### Supported transformers
 
 #### `ValueOf` and `Unit`
 
+##### ValueOf
+
+The `valueof` transformer is realy the only transformer that can extract data from the
+input JSON.
+
+It doesn't not support any bindings (will throw an exception) and has a required config
+
+```csharp
+public class ValueOfTransformerConfig
+{
+    [JsonProperty("path")]
+    public string Path { get; set; }
+}
+```
+
+or in JSON
+
+```json
+{
+    "path" : ""
+}
+```
+
+The value of the property `Path` is expected to be a valid JSON Path expression 
+supported by Newtonsfost JSON.net library.
+
+###### usage
+
+Input:
+```json
+{
+  "menu": {
+    "popup": {
+      "menuitem": [{
+          "value": "Open",
+          "onclick": "OpenDoc()"
+        }, {
+          "value": "Close",
+          "onclick": "CloseDoc()"
+        }
+      ],
+	  "submenuitem": "CloseSession()"
+    }
+  }
+}
+```
+
+Recipe:
+
+```just
+#obj(
+  #property(
+    #unit({"value":"result"}), 
+    #obj(
+      #property(
+        #unit({"value":"Open"}), 
+        #valueof({"path":"$.menu.popup.menuitem[?(@.value=='Open')].onclick"})), 
+      #property(
+        #unit({"value":"Close"}), 
+        #valueof({"path":"$.menu.popup.menuitem[?(@.value=='Close')].onclick"})))))
+```
+
+or
+
+```json
+{
+  "name": "obj",
+  "bindings": [
+    {
+      "name": "property",
+      "bindings": [
+        {
+          "name": "unit",
+          "config": {
+            "value": "result"
+          }
+        },
+        {
+          "name": "obj",
+          "bindings": [
+            {
+              "name": "property",
+              "bindings": [
+                {
+                  "name": "unit",
+                  "config": {
+                    "value": "Open"
+                  }
+                },
+                {
+                  "name": "valueof",
+                  "config": {
+                    "path": "$.menu.popup.menuitem[?(@.value=='Open')].onclick"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "property",
+              "bindings": [
+                {
+                  "name": "unit",
+                  "config": {
+                    "value": "Close"
+                  }
+                },
+                {
+                  "name": "valueof",
+                  "config": {
+                    "path": "$.menu.popup.menuitem[?(@.value=='Close')].onclick"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Result:
+
+```json
+{
+  "result": {
+    "Open": "OpenDoc()",
+	"Close": "CloseDoc()"
+  }
+}
+```
+
+> Note: there are other transformers used here, as the `valueof` transformer is really 
+> use less in a context other than in conjunction with other transformers.
+
+###### Context awareness
+Notice that when working within a `#current` transformer the path will be relative to
+the current item in an iteration, not the root of the entire input JSON.
+
+##### Unit
+
+The `unit` transformer, just like the `valueof` transformer does not support any bindings
+and will also throw an exception when attempting to bind it.
+
+The purpose of the `unit` transformer is to allow passing constant values into the
+expression. A common use case could be when providing property names or constant parameters
+for a predicate expression.
+
+Just like the `valueof` transformer, the `unit` transformer also requires configuration:
+
+```csharp
+public class UnitTransformerConfig
+{
+    [JsonProperty("value")]
+    public object Value { get; set; }
+}
+```
+
+or in JSON
+
+```json
+{
+    "value" : ""
+}
+```
+
+Notice that the value can be any valid JSON value, as long as it makes sense in the
+context of the whole expression.
+
 #### Type converters
 
-#### Mapper
+Currently there are 4 type converters supported out of the box:
+
+* `tostring`
+* `todecimal`
+* `toboolean`
+* `tonumber`
+
+all these transformers support transformations strictly from and to those types only.
 
 #### Aggregators
 
-#### Math Reducers
+##### `toarray` Aggregator
 
-#### String Reducers
+#### Collection
+
+##### `current` item selector
+
+used in a loop to reference the current value. A nested `valueof` transformer will
+execute the JSON Path on the current item as root element.
+
+##### `select` Operator
+
+##### `first` Operator
+
+##### `single` Operator
+
+##### `where` Operator
+
+#### Structural
+
+##### `deconstruct` Transformer
+
+Takes an object and transforms it to an array of (key, value) tuples
+
+##### `agr_obj` Transformer
+
+> Note: will be removed in favor of a generic aggregate collection operator
+
+Takes an array and constructs an object out of it using key and value selectors
+
+##### `property` operator
+
+creates a `JProperty` from a given key and value
+
+#### Math
+
+##### Reducers
+
+###### `min` Reducer
+
+###### `max` Reducer
+
+###### `avg` Reducer
+
+###### `sum` Reducer
+
+##### Operators
+
+**TBD**
+
+#### String
+
+##### Reducers
+
+###### `concat` Reducer
+
+###### `str_join` Reducer
+
+##### Operators
+
+###### `firstindexof` Operator
+
+###### `lastindexof` Operator
+
+###### `substring` Operator

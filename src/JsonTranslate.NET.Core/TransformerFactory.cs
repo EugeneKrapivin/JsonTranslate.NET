@@ -56,7 +56,9 @@ namespace JsonTranslate.NET.Core
 
             var (type, _) = value;
 
-            return Activator.CreateInstance(type, conf) as IJTokenTransformer;
+            return conf == null 
+                ? Activator.CreateInstance(type) as IJTokenTransformer
+                : Activator.CreateInstance(type, conf) as IJTokenTransformer;
         }
 
         public TypeInfo RemoveTransformer(string name)

@@ -15,12 +15,12 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
         [Test]
         public void Transformer_Successfully_Create_Projected_Collection_Of_Objects()
         {
-            var type_prop = new KeyedTransformer()
+            var type_prop = new PropertyTransformer()
                 .Bind(new UnitTransformer(new() { ["value"] = "t" }))
                 .Bind(new CurrentItemSelector()
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$.type" })));
 
-            var city_prop = new KeyedTransformer()
+            var city_prop = new PropertyTransformer()
                 .Bind(new UnitTransformer(new() { ["value"] = "c" }))
                 .Bind(new CurrentItemSelector()
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$.city" })));
@@ -121,17 +121,17 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
 	]
 }");
 
-            var type_prop = new KeyedTransformer()
+            var type_prop = new PropertyTransformer()
                 .Bind(new UnitTransformer(new() { ["value"] = "type" }))
                 .Bind(new CurrentItemSelector()
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$.type" })));
 
-            var amount_prop = new KeyedTransformer()
+            var amount_prop = new PropertyTransformer()
                 .Bind(new UnitTransformer(new() { ["value"] = "amount" }))
                 .Bind(new CurrentItemSelector()
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$.amount" })));
 
-            var currency_prop = new KeyedTransformer()
+            var currency_prop = new PropertyTransformer()
                 .Bind(new UnitTransformer(new() { ["value"] = "currency" }))
                 .Bind(new ValueOfTransformer(new() { ["path"] = "$.currency" }));
 
@@ -147,10 +147,10 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
                 .Bind(obj);
 
             var root = new ObjectTransformer()
-                .Bind(new KeyedTransformer()
+                .Bind(new PropertyTransformer()
                     .Bind(new UnitTransformer(new() { ["value"] = "date" }))
                     .Bind(new ValueOfTransformer(new() { ["path"] = "$.date" })))
-                .Bind(new KeyedTransformer()
+                .Bind(new PropertyTransformer()
                     .Bind(new UnitTransformer(new() { ["value"] = "purchases" }))
                     .Bind(selector));
 

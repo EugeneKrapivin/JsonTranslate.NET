@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JsonTranslate.NET.Core.Abstractions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.String.Reducers
@@ -17,10 +18,13 @@ namespace JsonTranslate.NET.Core.Transformers.String.Reducers
             _config = this.GetConfig<StringJoinAggregatorConfig>(conf);
         }
 
+        public override JObject Config => JObject.FromObject(_config);
+
         protected override JToken Reduce(IEnumerable<string> values, TransformationContext ctx = null) => string.Join(_config.Separator, values);
 
         public class StringJoinAggregatorConfig
         {
+            [JsonProperty("separator")]
             public string Separator { get; set; }
         }
     }

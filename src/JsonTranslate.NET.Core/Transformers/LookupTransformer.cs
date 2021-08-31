@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
@@ -11,6 +13,8 @@ namespace JsonTranslate.NET.Core.Transformers
     public class LookupTransformer : SinglyBoundTransformer
     {
         private readonly LookupConfig _lookupConfig;
+
+        public override JObject Config => JObject.FromObject(_lookupConfig);
 
         public override IEnumerable<JTokenType> InputTypes => JTokenTypeConstants.Any;
         
@@ -52,10 +56,14 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public class LookupConfig
         {
+            [JsonProperty("map")]
             public List<KeyValuePair<JToken, JToken>> Map { get; set; } = new();
 
+            [JsonProperty("onMissing")]
+            [JsonConverter(typeof(StringEnumConverter))]
             public HandleMissing OnMissing { get; set; } = HandleMissing.Value;
 
+            [JsonProperty("default")]
             public JToken Default { get; set; }
 
             public enum HandleMissing

@@ -40,20 +40,16 @@ namespace JsonTranslate.NET.Transformer.UnitTests
             {
                 yield return new TestCaseData(
                     new JObject {["path"] = "expected value"},
-                    new JObject {["path"] = "$.pathDoesn'tExist"},
-                    null);
+                    new JObject {["path"] = "$.pathDoesn'tExist"});
                 yield return new TestCaseData(
                     new JObject {["inner"] = new JObject {["path"] = "expected value"}},
-                    new JObject {["path"] = "$.inner.pathDoesn'tExist"},
-                    null);
+                    new JObject {["path"] = "$.inner.pathDoesn'tExist"});
                 yield return new TestCaseData(
                     new JObject {["inner"] = new JObject {["path"] = "expected value"}},
-                    new JObject {["path"] = "$..pathDoesn'tExist"},
-                    null);
+                    new JObject {["path"] = "$..pathDoesn'tExist"});
                 yield return new TestCaseData(
                     new JObject {["inner"] = new JObject {["inner"] = new JObject {["path"] = "expected value"}}},
-                    new JObject {["path"] = "$..[?(@.path)].pathDoesn'tExist"},
-                    null);
+                    new JObject {["path"] = "$..[?(@.path)].pathDoesn'tExist"});
             }
         }
 
@@ -104,14 +100,13 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         }
 
         [TestCaseSource(nameof(NegativeTestCases))]
-        public void Valueof_Invalid_Path_Should_Return_Null(JToken json, JObject conf, JToken expected)
+        public void Valueof_Invalid_Path_Should_Throw(JToken json, JObject conf)
         {
             // Act
             var sut = new ValueOfTransformer(conf);
-            var result = sut.Transform(json);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(() => sut.Transform(json), Throws.Exception);
         }
 
         [TestCaseSource(nameof(PositiveTypeValidationTestCases))]

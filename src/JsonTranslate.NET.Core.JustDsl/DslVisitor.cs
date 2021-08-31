@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using JsonTranslate.NET.Core.Abstractions;
 using Newtonsoft.Json.Linq;
 
@@ -11,13 +13,13 @@ namespace JsonTranslate.NET.Core.JustDsl
             var name = context.IDENTIFIER().GetText();
 
             var conf = context.config()?.GetText();
-            var bindings = context.argumentList();
+            var arguments = context.argumentList()?.argument() ?? Array.Empty<JustDslParser.ArgumentContext>();
 
             var instruction = new Instruction
             {
                 Name = name,
                 Config = conf == null ? null : JObject.Parse(conf),
-                Bindings = bindings?.argument().Select(x => x.Accept(this)).ToList()
+                Bindings = arguments.Select(x => x.Accept(this)).ToList()
             };
 
             return instruction;

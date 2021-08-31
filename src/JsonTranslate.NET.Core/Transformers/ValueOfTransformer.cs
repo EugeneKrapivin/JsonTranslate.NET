@@ -1,6 +1,7 @@
 ﻿using System;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
@@ -9,6 +10,14 @@ namespace JsonTranslate.NET.Core.Transformers
     public class ValueOfTransformer : ValueProvidingTransformer
     {
         private readonly ValueOfTransformerConfig _valueOfTransformerConfig;
+
+        private static readonly JsonSelectSettings JsonSelectSettings = new()
+        {
+            ErrorWhenNoMatch = true,
+            RegexMatchTimeout = TimeSpan.FromMilliseconds(25)
+        };
+
+        public override JObject Config => JObject.FromObject(_valueOfTransformerConfig);
 
         public ValueOfTransformer(JObject conf)
         {
@@ -19,11 +28,12 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            return root.SelectToken(_valueOfTransformerConfig.Path);
+            return root.SelectToken(_valueOfTransformerConfig.Path, JsonSelectSettings);
         }
 
         public class ValueOfTransformerConfig
         {
+            [JsonProperty("path")]
             public string Path { get; set; }
         }
     }

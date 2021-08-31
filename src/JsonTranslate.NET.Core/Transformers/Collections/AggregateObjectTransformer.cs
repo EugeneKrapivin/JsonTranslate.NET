@@ -7,8 +7,8 @@ using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
-    [Transformer("obj")]
-    public class ToObjectTransformer : TransformerBase
+    [Transformer("agr_obj")]
+    public class AggregateObjectTransformer : TransformerBase
     {
         private IJTokenTransformer _source;
         private IJTokenTransformer _keySelector;

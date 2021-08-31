@@ -18,14 +18,14 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
         {
             EnsureSource(source);
             
-            if (source is KeyedTransformer)
+            if (source is PropertyTransformer)
             {
                 _sources.Add(source);
             }
             else
             {
                 throw new NotSupportedException(
-                    $"Transformer of type `{nameof(ObjectTransformer)}` only supports bindings of type `{nameof(KeyedTransformer)}`");
+                    $"Transformer of type `{nameof(ObjectTransformer)}` only supports bindings of type `{nameof(PropertyTransformer)}`");
             }
 
             EnsureNoCycles();

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("single")]
-    public class SingleTransformer : CollectionTransformer
+    public class SingleTransformer : AbstractCollectionTransformer
     {
         public override IEnumerable<JTokenType> OutputTypes => JTokenTypeConstants.Any;
 

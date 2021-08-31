@@ -3,14 +3,14 @@
 LPAREN:             '(';
 RPAREN:             ')';
 FUNCTION_START:     '#';
-ARG_SEPERATOR:      ',';
+ARG_SEPARATOR:      ',';
 
 IDENTIFIER
     : [a-zA-Z] [a-zA-Z\-_] *
     ;
 
 func
-	: FUNCTION_START IDENTIFIER LPAREN config? argumentList? RPAREN
+	: FUNCTION_START IDENTIFIER LPAREN (config?) (argumentList?) RPAREN
     ;
 
 argument
@@ -18,8 +18,8 @@ argument
    ;
 
 argumentList
-   : ARG_SEPERATOR? argument
-   | (ARG_SEPERATOR argument)+
+   : (ARG_SEPARATOR argument)+
+   | ARG_SEPARATOR? argument
    ;
 
 config

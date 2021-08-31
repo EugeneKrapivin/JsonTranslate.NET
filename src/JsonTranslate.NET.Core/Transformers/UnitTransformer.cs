@@ -1,6 +1,8 @@
-﻿using JsonTranslate.NET.Core.Abstractions;
+﻿using System;
+using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Exceptions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace JsonTranslate.NET.Core.Transformers
@@ -9,6 +11,8 @@ namespace JsonTranslate.NET.Core.Transformers
     public sealed class UnitTransformer : ValueProvidingTransformer
     {
         private readonly UnitTransformerConfig _unitTransformerConfig;
+
+        public override JObject Config => JObject.FromObject(_unitTransformerConfig);
 
         public UnitTransformer(JObject conf)
         {
@@ -25,6 +29,7 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public class UnitTransformerConfig
         {
+            [JsonProperty("value")]
             public object Value { get; set; }
         }
     }

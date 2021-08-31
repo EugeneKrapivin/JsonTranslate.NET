@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using JsonTranslate.NET.Core;
 using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.JustDsl;
 using JsonTranslate.NET.Core.Transformers;
 using JsonTranslate.NET.Core.Transformers.Collections;
 using JsonTranslate.NET.Core.Transformers.String.Reducers;
+using JsonTranslate.NET.Core.Visitors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -56,8 +58,8 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
 
             var expected = new JObject
             {
-                ["phoneNumbers"] = new JObject 
-                { 
+                ["phoneNumbers"] = new JObject
+                {
                     ["home"] = "+1-555-5551",
                     ["work"] = "+1-555-5552"
                 },
@@ -79,39 +81,39 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
             };
 
             var root = new ObjectTransformer()
-                    .Bind(new KeyedTransformer()
-                        .Bind("phoneNumbers".AsTransformationResult())
-                        .Bind(new ToObjectTransformer()
-                            .Bind(new ValueOfTransformer(new() { ["path"] = "$.phone_numbers" }))
-                            .Bind(new CurrentItemSelector()
-                                .Bind(new ValueOfTransformer(new() { ["path"] = "$.type" })))
-                            .Bind(new CurrentItemSelector()
-                                .Bind(new ValueOfTransformer(new() { ["path"] = "$.number" })))))
-                    .Bind(new KeyedTransformer()
-                        .Bind("addrs".AsTransformationResult())
-                        .Bind(new ToObjectTransformer()
-                            .Bind(new ValueOfTransformer(new() { ["path"] = "$.addresses" }))
-                            .Bind(new CurrentItemSelector()
-                                 .Bind(new ValueOfTransformer(new() { ["path"] = "$.type" })))
-                            .Bind(new CurrentItemSelector()
-                                 .Bind(new ObjectTransformer()
-                                    .Bind(new KeyedTransformer()
-                                        .Bind("city".AsTransformationResult())
-                                        .Bind(new ValueOfTransformer(new() { ["path"] = "$.city" })))
-                                    .Bind(new KeyedTransformer()
-                                        .Bind("country".AsTransformationResult())
-                                        .Bind(new ValueOfTransformer(new() { ["path"] = "$.country" })))
-                                    .Bind(new KeyedTransformer()
-                                        .Bind("street".AsTransformationResult())
-                                        .Bind(new StringJoinAggregator(new() { ["separator"] = ", " })
-                                            .Bind(new ValueOfTransformer(new() { ["path"] = "$.street1" }))
-                                            .Bind(new ValueOfTransformer(new() { ["path"] = "$.street2" }))
-                                        )
+                .Bind(new PropertyTransformer()
+                    .Bind("phoneNumbers".AsUnit())
+                    .Bind(new AggregateObjectTransformer()
+                        .Bind(new ValueOfTransformer(new() {["path"] = "$.phone_numbers"}))
+                        .Bind(new CurrentItemSelector()
+                            .Bind(new ValueOfTransformer(new() {["path"] = "$.type"})))
+                        .Bind(new CurrentItemSelector()
+                            .Bind(new ValueOfTransformer(new() {["path"] = "$.number"})))))
+                .Bind(new PropertyTransformer()
+                    .Bind("addrs".AsUnit())
+                    .Bind(new AggregateObjectTransformer()
+                        .Bind(new ValueOfTransformer(new() {["path"] = "$.addresses"}))
+                        .Bind(new CurrentItemSelector()
+                            .Bind(new ValueOfTransformer(new() {["path"] = "$.type"})))
+                        .Bind(new CurrentItemSelector()
+                            .Bind(new ObjectTransformer()
+                                .Bind(new PropertyTransformer()
+                                    .Bind("city".AsUnit())
+                                    .Bind(new ValueOfTransformer(new() {["path"] = "$.city"})))
+                                .Bind(new PropertyTransformer()
+                                    .Bind("country".AsUnit())
+                                    .Bind(new ValueOfTransformer(new() {["path"] = "$.country"})))
+                                .Bind(new PropertyTransformer()
+                                    .Bind("street".AsUnit())
+                                    .Bind(new StringJoinAggregator(new() {["separator"] = ", "})
+                                        .Bind(new ValueOfTransformer(new() {["path"] = "$.street1"}))
+                                        .Bind(new ValueOfTransformer(new() {["path"] = "$.street2"}))
                                     )
-                                 )
+                                )
                             )
                         )
-                    );
+                    )
+                );
 
             var actual = root.Transform(source);
 
@@ -122,20 +124,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
 
             Assert.That(JToken.DeepEquals(expected, actual));
 
-            Console.WriteLine(
-            new JustDslSerializer().Serialize(root.Accept(new ToInstructionVisitor())));
-
-        }
-
-        private class ToInstructionVisitor : IVisitor<IJTokenTransformer, Instruction>
-        {
-            public Instruction Visit(IJTokenTransformer target) =>
-                new Instruction
-                {
-                    Name = target.GetType().GetCustomAttribute<TransformerAttribute>()?.Name,
-                    Config = target.Config,
-                    Bindings = target.Sources.Select(source => source.Accept(this)).ToList()
-                };
+            Console.WriteLine(new JustDslSerializer().Serialize(root.Accept(new ToInstructionVisitor())));
         }
     }
 }

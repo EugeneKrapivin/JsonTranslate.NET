@@ -20,11 +20,11 @@ namespace JsonTranslate.NET.Core.JustDsl
 
             if (instruction.Bindings?.Any() == true)
             {
-                sb.Append(", ");
-                sb.Append(string.Join(", ", instruction.Bindings.Select(x => x.ToString())));
+                if (instruction.Config != null) sb.Append(", ");
+                sb.AppendJoin(", ", instruction.Bindings.Select(Serialize));
             }
 
-            sb.Append($")");
+            sb.Append(")");
 
             return sb.ToString();
         }

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("first")]
-    public class FirstTransformer : CollectionTransformer
+    public class FirstTransformer : AbstractCollectionTransformer
     {
         public override IEnumerable<JTokenType> OutputTypes => new[] {JTokenType.Integer};
 

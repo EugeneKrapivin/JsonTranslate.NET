@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.Collections
 {
     [Transformer("where")]
-    public class WhereTransformer : CollectionTransformer
+    public class WhereTransformer : AbstractCollectionTransformer
     {
         public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
