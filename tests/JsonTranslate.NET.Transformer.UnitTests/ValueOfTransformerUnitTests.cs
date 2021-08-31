@@ -104,7 +104,6 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             // Act
             var sut = new ValueOfTransformer(conf);
-
             // Assert
             Assert.That(() => sut.Transform(json), Throws.Exception);
         }

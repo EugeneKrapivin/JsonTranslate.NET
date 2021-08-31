@@ -28,7 +28,10 @@ namespace JsonTranslate.NET.Core.Transformers
 
         public override JToken Transform(JToken root, TransformationContext ctx = null)
         {
-            return root.SelectToken(_valueOfTransformerConfig.Path, JsonSelectSettings);
+            var result = root.SelectToken(_valueOfTransformerConfig.Path, JsonSelectSettings);
+            if (result == null) throw new Exception($"Path `{_valueOfTransformerConfig.Path}` didn't yield a value");
+
+            return result;
         }
 
         public class ValueOfTransformerConfig
