@@ -19,8 +19,9 @@
 		<Antlr4 Include="JustDsl.g4" />
 	</ItemGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>3021;1701;1702</NoWarn>
+	<!-- ignoring Antlr based warnings -->
+	<PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+		<NoWarn>3021</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
