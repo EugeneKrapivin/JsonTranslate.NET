@@ -1,5 +1,6 @@
 [![.NET](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/EugeneKrapivin/JsonTranslate.NET/actions/workflows/codeql-analysis.yml)
+[![codecov](https://codecov.io/gh/EugeneKrapivin/JsonTranslate.NET/branch/main/graph/badge.svg?token=91KJVNDKWQ)](https://codecov.io/gh/EugeneKrapivin/JsonTranslate.NET)
 
 # JsonTranslate.NET
 
