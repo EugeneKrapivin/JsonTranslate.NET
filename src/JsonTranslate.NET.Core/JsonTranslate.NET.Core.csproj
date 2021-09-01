@@ -1,9 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<IsPackable>true</IsPackable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" />
 	</ItemGroup>
@@ -14,12 +9,5 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="JsonTranslate.NET.Transformer.UnitTests" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="..\..\LICENSE">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
 	</ItemGroup>
 </Project>

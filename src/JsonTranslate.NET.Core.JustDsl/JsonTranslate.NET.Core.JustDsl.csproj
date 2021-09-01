@@ -1,8 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<IsPackable>true</IsPackable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\JsonTranslate.NET.Core.Abstractions\JsonTranslate.NET.Core.Abstractions.csproj" />
@@ -23,11 +19,4 @@
 	<PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
 		<NoWarn>3021</NoWarn>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Include="..\..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
 </Project>
