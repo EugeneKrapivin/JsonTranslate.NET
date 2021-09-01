@@ -28,7 +28,12 @@ namespace JsonTranslate.NET.Core.JustDsl
             if (instruction.Bindings?.Any() == true)
             {
                 if (instruction.Config != null) sb.Append(", ");
+#if NETSTANDARD2_1
                 sb.AppendJoin(", ", instruction.Bindings.Select(Serialize));
+#else
+                sb.Append(string.Join(", ", instruction.Bindings.Select(Serialize)));
+#endif
+
             }
 
             sb.Append(")");
@@ -36,8 +41,10 @@ namespace JsonTranslate.NET.Core.JustDsl
             return sb.ToString();
         }
 
-        public Instruction Deserialize([NotNull] string dsl)
+        public Instruction Deserialize(string dsl)
         {
+            if (dsl == null) throw new ArgumentNullException(nameof(dsl));
+
             var antlrStream = new AntlrInputStream(dsl);
             // TODO: add error listener to spot lexing errors
             var lexer = new JustDslLexer(antlrStream);
@@ -48,7 +55,7 @@ namespace JsonTranslate.NET.Core.JustDsl
             return visitor.Visit(ctx);
         }
 
-        private static JustDslParser.StartContext GetParser([NotNull] CommonTokenStream tokenizer)
+        private static JustDslParser.StartContext GetParser(CommonTokenStream tokenizer)
         {
             if (tokenizer == null) throw new ArgumentNullException(nameof(tokenizer));
 

@@ -2,9 +2,6 @@
 {
     public interface IAccepting<out T>
     {
-        public TR Accept<TR>(IVisitor<T, TR> visitor)
-        {
-            return visitor.Visit((T)this);
-        }
+        TR Accept<TR>(IVisitor<T, TR> visitor);
     }
 }

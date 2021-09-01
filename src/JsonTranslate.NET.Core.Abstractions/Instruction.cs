@@ -17,5 +17,10 @@ namespace JsonTranslate.NET.Core.Abstractions
             config = Config;
             bindings = Bindings;
         }
+
+        public TR Accept<TR>(IVisitor<Instruction, TR> visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 }
