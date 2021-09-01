@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<LangVersion>preview</LangVersion>
 		<Deterministic>true</Deterministic>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Version>0.0.1</Version>
