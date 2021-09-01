@@ -7,7 +7,7 @@
 		<Version>0.0.1</Version>
 		<Authors>Eugene Krapivin</Authors>
 		<Product>JsonTranslate.NET</Product>
-		<Description>JsonTranslate.NET library built on top of the successful Newtonsoft Json.NET aims to allow JSON data transformations using an easily serializable DSL (Json and Fluent).</Description>
+		<Description>JsonTranslate.NET library built on top of the successful Newtonsoft Json.NET aims to allow JSON data transformations using an easily serializable DSL (JSON and custom DSL).</Description>
 		<Copyright>Eugene Krapivin</Copyright>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NeutralLanguage>en</NeutralLanguage>

@@ -8,7 +8,7 @@ namespace JsonTranslate.NET.Core.Abstractions.Transformers
     {
         protected IJTokenTransformer _source;
         
-        private List<IJTokenTransformer> _sources = new(1); // ugly hack :(
+        private readonly List<IJTokenTransformer> _sources = new(1); // ugly hack :(
 
         public override IEnumerable<IJTokenTransformer> Sources => _sources;
 

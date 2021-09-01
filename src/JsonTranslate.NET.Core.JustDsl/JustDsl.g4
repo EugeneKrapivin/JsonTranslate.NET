@@ -20,8 +20,8 @@ argument
    ;
 
 parameter_list
-   : (config argument_list)?
-   | no_config_parameter_list?
+   : config argument_list
+   | no_config_parameter_list
    ;
 
 argument_list

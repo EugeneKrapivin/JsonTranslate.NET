@@ -36,7 +36,7 @@ namespace JsonTranslate.NET.Core.JustDsl
 
             }
 
-            sb.Append(")");
+            sb.Append(')');
 
             return sb.ToString();
         }
