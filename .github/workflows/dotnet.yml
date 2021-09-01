@@ -30,7 +30,7 @@ jobs:
         path: CoverageResults/
     - uses: codecov/codecov-action@v2
       with:
-        # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         directory: CoverageResults/
         flags: unittests # optional
         name: JsonTranslate.NET # optional
