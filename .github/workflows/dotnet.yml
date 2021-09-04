@@ -1,4 +1,4 @@
-name: .NET
+name: dotNET Build & Test
 
 on:
   push:
@@ -8,19 +8,28 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        sdk: [5.0.x]
+      fail-fast: true
+      
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: ${{ matrix.sdk }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
     - name: Test
       run: dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutput=../../CoverageResults/ /p:MergeWith="../../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Archive code coverage results
