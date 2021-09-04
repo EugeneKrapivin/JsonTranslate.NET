@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest] # removed windows because its slow AF
         sdk: [5.0.x]
       fail-fast: true
       
@@ -30,10 +30,12 @@ jobs:
       run: dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutput=../../CoverageResults/ /p:MergeWith="../../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
+      if: matrix.os == 'ubuntu-latest'
       with:
         name: code-coverage-report
         path: CoverageResults/
     - uses: codecov/codecov-action@v2
+      if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
         directory: CoverageResults/
