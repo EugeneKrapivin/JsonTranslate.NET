@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 coverlet/
 coverage.json
+tests/coverage/

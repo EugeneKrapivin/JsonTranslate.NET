@@ -3,8 +3,10 @@
 
     <PropertyGroup>
         <CollectCoverage>true</CollectCoverage>
+        <CoverletOutput>../coverage/$(MSBuildProjectName)/</CoverletOutput>
+        <CoverletOutputFormat>opencover,json</CoverletOutputFormat>
+        <UseSourceLink>true</UseSourceLink>
     </PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector">
             <PrivateAssets>all</PrivateAssets>
