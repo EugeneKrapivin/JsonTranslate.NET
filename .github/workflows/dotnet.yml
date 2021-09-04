@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest] # removed windows-latest and macos-latest because its slow AF
+        os: [windows-latest, macos-latest, ubuntu-latest]
         sdk: [5.0.x]
       fail-fast: true
       
