@@ -1,0 +1,10 @@
+<Project>
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+	<Target Name="CopyPackage" AfterTargets="Pack">
+		<Copy
+			SourceFiles="$(OutputPath)\$(PackageId).$(PackageVersion).nupkg"
+			DestinationFolder="..\Output"
+		/>
+	</Target>
+</Project>
