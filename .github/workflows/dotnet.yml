@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test & Cover
-      run: dotnet test
+      run: dotnet test --no-build
     - name: ReportGenerator
       if: matrix.os == 'ubuntu-latest'
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.12
