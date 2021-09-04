@@ -1,6 +1,10 @@
 <Project>
 	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
+    <PropertyGroup>
+        <CollectCoverage>true</CollectCoverage>
+    </PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector">
             <PrivateAssets>all</PrivateAssets>
