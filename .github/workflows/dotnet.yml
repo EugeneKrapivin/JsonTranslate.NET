@@ -26,12 +26,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-  
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Test
+    - name: Test & Cover
       run: dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutput=../../CoverageResults/ /p:MergeWith="../../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
