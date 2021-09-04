@@ -27,18 +27,36 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test & Cover
-      run: dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutput=../../CoverageResults/ /p:MergeWith="../../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v2
-      if: matrix.os == 'ubuntu-latest'
+      run: dotnet test
+    # - name: Archive code coverage results
+    #  uses: actions/upload-artifact@v2
+    #  if: matrix.os == 'ubuntu-latest'
+    #  with:
+    #    name: code-coverage-report
+    #    path: CoverageResults/
+    
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@4.8.12
       with:
-        name: code-coverage-report
-        path: CoverageResults/
+        reports: './tests/coverage/*/coverage.xml'
+        targetdir: './tests/coverage/summary'
+        reporttypes: 'Cobertura'
+        sourcedirs: './src' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
+        historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
+        plugins: '' # Optional plugin files for custom reports or custom history storage (separated by semicolon).
+        assemblyfilters: '+*' # Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        classfilters: '+*' # Optional list of classes that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        filefilters: '+*' # Optional list of files that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed.
+        verbosity: 'Info' # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
+        title: 'JsonTranslate.NET' # Optional title.
+        tag: '${{ github.run_number }}_${{ github.run_id }}' # Optional tag or build version.
+        customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+        toolpath: 'reportgeneratortool' # Default directory for installing the dotnet tool.
     - uses: codecov/codecov-action@v2
       if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        directory: CoverageResults/
+        directory: ./tests/summary/
         flags: unittests # optional
         name: JsonTranslate.NET # optional
         verbose: true # optional (default = false)
