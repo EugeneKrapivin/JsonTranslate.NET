@@ -11,8 +11,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        sdk: [5.0.x]
+        os: [macos-latest, ubuntu-latest]
+        sdk: [6.0.x]
       fail-fast: true
       
     runs-on: ${{ matrix.os }}
