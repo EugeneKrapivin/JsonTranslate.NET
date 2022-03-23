@@ -19,8 +19,10 @@ namespace JsonTranslate.NET.Core.Transformers.Collections
                 throw new BadTransformerBindingException("transformer `#current` should only be bound inside a looping transformer (e.g. select)");
 
             var item = ctx.CurrentItem;
-
-            return _source.Transform(item);
+            
+            ctx.Root ??= root;
+            
+            return _source.Transform(item, ctx);
         }
     }
 }
