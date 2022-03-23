@@ -105,7 +105,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
                                     .Bind(new ValueOfTransformer(new() {["path"] = "$.country"})))
                                 .Bind(new PropertyTransformer()
                                     .Bind("street".AsUnit())
-                                    .Bind(new StringJoinAggregator(new() {["separator"] = ", "})
+                                    .Bind(new StringJoinTransformer(new() {["separator"] = ", "})
                                         .Bind(new ValueOfTransformer(new() {["path"] = "$.street1"}))
                                         .Bind(new ValueOfTransformer(new() {["path"] = "$.street2"}))
                                     )

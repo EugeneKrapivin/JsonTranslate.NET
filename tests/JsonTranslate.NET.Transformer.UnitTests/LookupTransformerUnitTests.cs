@@ -80,14 +80,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         {
             Assert.That(() => new LookupTransformer(null), Throws.ArgumentNullException);
         }
-
-        [Test]
-        [Ignore("enforce config schema")]
-        public void Lookup_Requires_Valid_Config()
-        {
-            Assert.That(() => new LookupTransformer(new JObject()), Throws.ArgumentException);
-        }
-
+     
         [Test]
         public void Lookup_Allows_Single_Binding()
         {

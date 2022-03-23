@@ -2,17 +2,19 @@
 	<ItemGroup>
 		<PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
 
-		<PackageVersion Include="Antlr4.Runtime.Standard" Version="4.9.2" />
-		<PackageVersion Include="Antlr4BuildTasks" Version="8.16"/>
+		<PackageVersion Include="Antlr4.Runtime.Standard" Version="4.9.3" />
+		<PackageVersion Include="Antlr4BuildTasks" Version="8.21.0"/>
 
-		<PackageVersion Include="NUnit" Version="3.13.2" />
-		<PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-		<PackageVersion Include="NSubstitute" Version="4.2.2" />
+		<PackageVersion Include="NUnit" Version="3.13.3" />
+		<PackageVersion Include="NUnit3TestAdapter" Version="4.2.1" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+		<PackageVersion Include="NSubstitute" Version="4.3.0" />
 
-		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
-		<PackageVersion Include="coverlet.collector" Version="3.1.0" />
-        <PackageVersion Include="coverlet.msbuild" Version="3.1.0" />
-            
+		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+		<PackageVersion Include="coverlet.collector" Version="3.1.2" />
+        <PackageVersion Include="coverlet.msbuild" Version="3.1.2" />
+		<PackageVersion Include="NUnit.Analyzers" Version="3.3.0" />
+
+
 	</ItemGroup>
 </Project>

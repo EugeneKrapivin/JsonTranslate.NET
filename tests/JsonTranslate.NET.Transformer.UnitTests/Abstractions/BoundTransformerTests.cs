@@ -5,8 +5,7 @@ using static JsonTranslate.NET.Transformer.UnitTests.Abstractions.TransformerCre
 
 namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
 {
-    [TestFixture(typeof(SinglyBoundTestTransformer))]
-    [TestFixture(typeof(MultiBoundTestTransformer))]
+    [TestFixture(Description = "Test base properties of all transformers that support binding")]
     [TestFixtureSource(typeof(TransformersGenericSources), nameof(TransformersGenericSources.BoundTransformers))]
     public class BoundTransformerTests<T> 
         where T : IJTokenTransformer

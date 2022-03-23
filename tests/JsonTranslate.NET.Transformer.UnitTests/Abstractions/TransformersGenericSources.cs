@@ -17,7 +17,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
             {
                 var types = Assembly.GetAssembly(typeof(TransformerFactory)).DefinedTypes;
                 var list = types
-                    .Where(type => CustomAttributeExtensions.GetCustomAttribute<TransformerAttribute>((MemberInfo) type) is not null)
+                    .Where(type => type.GetCustomAttribute<TransformerAttribute>() is not null)
                     .Where(x => x.ImplementedInterfaces.Any(iface => iface == typeof(IJTokenTransformer)))
                     .Where(x => x.BaseType != typeof(ValueProvidingTransformer))
                     .ToList();

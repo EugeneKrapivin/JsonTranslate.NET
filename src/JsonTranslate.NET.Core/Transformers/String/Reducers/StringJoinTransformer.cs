@@ -7,22 +7,22 @@ using Newtonsoft.Json.Linq;
 namespace JsonTranslate.NET.Core.Transformers.String.Reducers
 {
     [Transformer(name: "str_join", requiresConfig: true)]
-    public class StringJoinAggregator : AbstractStringReducingTransformer
+    public class StringJoinTransformer : AbstractStringReducingTransformer
     {
-        private readonly StringJoinAggregatorConfig _config;
+        private readonly StringJoinTransformerConfig _config;
 
-        public StringJoinAggregator(JObject conf)
+        public StringJoinTransformer(JObject conf)
         {
             if (conf == null) throw new ArgumentNullException($"{nameof(ValueOfTransformer)} requires configuration");
 
-            _config = this.GetConfig<StringJoinAggregatorConfig>(conf);
+            _config = this.GetConfig<StringJoinTransformerConfig>(conf);
         }
 
         public override JObject Config => JObject.FromObject(_config);
 
         protected override JToken Reduce(IEnumerable<string> values, TransformationContext ctx = null) => string.Join(_config.Separator, values);
 
-        public class StringJoinAggregatorConfig
+        public class StringJoinTransformerConfig
         {
             [JsonProperty("separator")]
             public string Separator { get; set; }

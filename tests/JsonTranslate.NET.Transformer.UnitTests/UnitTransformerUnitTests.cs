@@ -61,13 +61,6 @@ namespace JsonTranslate.NET.Transformer.UnitTests
         }
 
         [Test]
-        [Ignore("enforce config schema")]
-        public void Unit_Requires_Valid_Config()
-        {
-            Assert.That(() => new UnitTransformer(new JObject()), Throws.ArgumentException);
-        }
-
-        [Test]
         public void Unit_Does_Not_Allow_Bindings()
         {
             var sut = new UnitTransformer(new JObject { ["value"] = "valid" });

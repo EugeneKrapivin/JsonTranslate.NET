@@ -3,6 +3,7 @@ using JsonTranslate.NET.Core.Abstractions;
 using JsonTranslate.NET.Core.Abstractions.Transformers;
 using JsonTranslate.NET.Core.Transformers;
 using JsonTranslate.NET.Core.Transformers.Collections;
+using JsonTranslate.NET.Core.Transformers.Date;
 using JsonTranslate.NET.Core.Transformers.String.Reducers;
 using Newtonsoft.Json.Linq;
 
@@ -25,8 +26,14 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
                     new JObject {["value"] = "$"}),
                 nameof(LookupTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget),
                     JObject.FromObject(new LookupTransformer.LookupConfig())),
-                nameof(StringJoinAggregator) => (TTarget) Activator.CreateInstance(typeof(TTarget),
-                    JObject.FromObject(new StringJoinAggregator.StringJoinAggregatorConfig())),
+                nameof(StringJoinTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget),
+                    JObject.FromObject(new StringJoinTransformer.StringJoinTransformerConfig())),
+                nameof(DateToDateTransformer) => (TTarget) Activator.CreateInstance(typeof(TTarget),
+                    JObject.FromObject(new DateToDateTransformer.DateFormatTransformerConfig())),
+                nameof(ToIsoDateTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget),
+                    JObject.FromObject(new ToIsoDateTransformer.ToIsoDateTransformerConfig())),
+                nameof(ToUnixTimestampTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget),
+                    JObject.FromObject(new ToUnixTimestampTransformer.ToUnixTimestampTransformerConfig())),
                 _ => Activator.CreateInstance<TTarget>()
             };
 
@@ -44,7 +51,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
                 nameof(ValueOfTransformer) => new JObject { ["path"] = "$" },
                 nameof(UnitTransformer) =>  new JObject { ["value"] = "$" },
                 nameof(LookupTransformer) =>  JObject.FromObject(new LookupTransformer.LookupConfig()),
-                nameof(StringJoinAggregator) =>  JObject.FromObject(new StringJoinAggregator.StringJoinAggregatorConfig()),
+                nameof(StringJoinTransformer) =>  JObject.FromObject(new StringJoinTransformer.StringJoinTransformerConfig()),
                 var x => throw new Exception($"Unknown configurable transformer of type {x}")
             };
 
@@ -55,7 +62,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Abstractions
                 nameof(ValueOfTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget), config),
                 nameof(UnitTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget), config),
                 nameof(LookupTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget), config),
-                nameof(StringJoinAggregator) => (TTarget)Activator.CreateInstance(typeof(TTarget), config),
+                nameof(StringJoinTransformer) => (TTarget)Activator.CreateInstance(typeof(TTarget), config),
                 var x => throw new Exception($"Unknown configurable transformer of type {x}")
             };
     }
