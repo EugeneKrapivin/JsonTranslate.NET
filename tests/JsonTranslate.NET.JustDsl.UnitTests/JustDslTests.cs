@@ -55,10 +55,10 @@ namespace JsonTranslate.NET.JustDsl.UnitTests
             var transformer = factory.BuildTransformationTree(instructions);
             var actual = transformer.Transform(source);
 
-            Console.WriteLine("From:");
-            Console.WriteLine(source.ToString(Formatting.Indented));
-            Console.WriteLine("To:");
-            Console.WriteLine(actual.ToString(Formatting.Indented));
+            //Console.WriteLine("From:");
+            //Console.WriteLine(source.ToString(Formatting.Indented));
+            //Console.WriteLine("To:");
+            //Console.WriteLine(actual.ToString(Formatting.Indented));
 
             Assert.That(JToken.DeepEquals(expected, actual));
         }

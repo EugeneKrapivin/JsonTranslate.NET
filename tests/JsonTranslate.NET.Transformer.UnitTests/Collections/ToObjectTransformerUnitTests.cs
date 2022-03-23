@@ -117,14 +117,14 @@ namespace JsonTranslate.NET.Transformer.UnitTests.Collections
 
             var actual = root.Transform(source);
 
-            Console.WriteLine("From:");
-            Console.WriteLine(source.ToString(Formatting.Indented));
-            Console.WriteLine("To:");
-            Console.WriteLine(actual.ToString(Formatting.Indented));
+            //Console.WriteLine("From:");
+            //Console.WriteLine(source.ToString(Formatting.Indented));
+            //Console.WriteLine("To:");
+            //Console.WriteLine(actual.ToString(Formatting.Indented));
 
             Assert.That(JToken.DeepEquals(expected, actual));
 
-            Console.WriteLine(new JustDslSerializer().Serialize(root.Accept(new ToInstructionVisitor())));
+            //Console.WriteLine(new JustDslSerializer().Serialize(root.Accept(new ToInstructionVisitor())));
         }
     }
 }

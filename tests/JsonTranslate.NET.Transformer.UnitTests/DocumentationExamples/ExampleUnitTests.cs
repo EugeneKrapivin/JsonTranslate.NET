@@ -99,7 +99,7 @@ namespace JsonTranslate.NET.Transformer.UnitTests.DocumentationExamples
             var actual = recipe.Transform(input);
 
 
-            Console.WriteLine(new JsonDslSerializer().Serialize(recipe.Accept(new ToInstructionVisitor())));
+            //Console.WriteLine(new JsonDslSerializer().Serialize(recipe.Accept(new ToInstructionVisitor())));
 
             Assert.That(JToken.DeepEquals(actual, expected));
 
