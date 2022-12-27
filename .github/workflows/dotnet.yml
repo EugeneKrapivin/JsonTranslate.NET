@@ -35,7 +35,7 @@ jobs:
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.12
       with:
         reports: './tests/coverage/*/*.xml'
-        targetdir: 'coveragereport'
+        targetdir: $GITHUB_WORKSPACE/coveragereport
         reporttypes: 'Cobertura'
         sourcedirs: './src' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
         historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
@@ -52,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        directory: coveragereport
+        directory: $GITHUB_WORKSPACE/coveragereport
         flags: unittests # optional
         name: JsonTranslate.NET # optional
         verbose: true # optional (default = false)
@@ -61,4 +61,4 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       with:
         name: code-coverage-report
-        path: coveragereport
+        path: $GITHUB_WORKSPACE/coveragereport
