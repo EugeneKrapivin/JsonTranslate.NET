@@ -351,3 +351,4 @@ MigrationBackup/
 coverlet/
 coverage.json
 tests/coverage/
+/tests/coveragereport
