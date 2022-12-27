@@ -2,6 +2,11 @@
 	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
     <PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+        <IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+    <PropertyGroup>
         <CollectCoverage>true</CollectCoverage>
         <CoverletOutput>../coverage/$(MSBuildProjectName)/</CoverletOutput>
         <CoverletOutputFormat>opencover,json</CoverletOutputFormat>
