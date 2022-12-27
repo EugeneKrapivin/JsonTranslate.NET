@@ -52,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        directory: $GITHUB_WORKSPACE/coveragereport
+        files: $GITHUB_WORKSPACE/coveragereport/Cobertura.xml
         flags: unittests # optional
         name: JsonTranslate.NET # optional
         verbose: true # optional (default = false)
