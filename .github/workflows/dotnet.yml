@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
         sdk: [7.0.x]
       fail-fast: true
       
@@ -35,8 +35,8 @@ jobs:
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.12
       with:
         reports: './tests/coverage/*/*.xml'
-        targetdir: './tests/coverage/summary'
-        reporttypes: 'HtmlInline;Cobertura'
+        targetdir: 'coveragereport'
+        reporttypes: 'Cobertura'
         sourcedirs: './src' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
         historydir: '' # Optional directory for storing persistent coverage information. Can be used in future reports to show coverage evolution.
         plugins: '' # Optional plugin files for custom reports or custom history storage (separated by semicolon).
@@ -52,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        directory: ./tests/coverage/summary
+        directory: coveragereport
         flags: unittests # optional
         name: JsonTranslate.NET # optional
         verbose: true # optional (default = false)
