@@ -18,9 +18,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.sdk }}
         include-prerelease: true
@@ -34,7 +34,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.12
       with:
-        reports: './tests/coverage/*/coverage.opencover.xml'
+        reports: './tests/coverage/*/*.xml'
         targetdir: './tests/coverage/summary'
         reporttypes: 'HtmlInline;Cobertura'
         sourcedirs: './src' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
@@ -48,7 +48,7 @@ jobs:
         tag: '${{ github.run_number }}_${{ github.run_id }}' # Optional tag or build version.
         customSettings: '' # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
         toolpath: 'reportgeneratortool' # Default directory for installing the dotnet tool.
-    - uses: codecov/codecov-action@v2
+    - uses: codecov/codecov-action@v3
       if: matrix.os == 'ubuntu-latest'
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
