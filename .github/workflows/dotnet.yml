@@ -23,7 +23,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.sdk }}
-        include-prerelease: true
+        dotnet-quality: 'preview'
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -57,7 +57,7 @@ jobs:
         name: JsonTranslate.NET # optional
         verbose: true # optional (default = false)
     - name: Archive code coverage results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: matrix.os == 'ubuntu-latest'
       with:
         name: code-coverage-report
