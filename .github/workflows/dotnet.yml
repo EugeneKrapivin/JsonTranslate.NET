@@ -61,4 +61,4 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       with:
         name: code-coverage-report
-        path: ./tests/coverage/summary
+        path: coveragereport
