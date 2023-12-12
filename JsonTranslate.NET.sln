@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		Directory.Packages.props = Directory.Packages.props
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LICENSE = LICENSE
 		nuget.config = nuget.config
 		README.md = README.md
@@ -43,6 +44,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.JsonDsl.UnitTests", "tests\JsonTranslate.NET.JsonDsl.UnitTests\JsonTranslate.NET.JsonDsl.UnitTests.csproj", "{FCB4F5E0-0D49-42F7-87EC-ADB2F0FFC715}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTranslate.NET.JustDsl.UnitTests", "tests\JsonTranslate.NET.JustDsl.UnitTests\JsonTranslate.NET.JustDsl.UnitTests.csproj", "{8E160573-53AD-4F08-98CB-ADB235C43B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{020E2A2D-FFCA-4076-A327-935E8646C9F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{AFF18B6C-D8C4-47B4-852C-EAC544F4F777}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +99,7 @@ Global
 		{1DA0A31A-6DCB-4FC4-905C-6C15A5CD7832} = {42D7EA7A-D561-4098-BACB-F5FC9CDDA475}
 		{FCB4F5E0-0D49-42F7-87EC-ADB2F0FFC715} = {42D7EA7A-D561-4098-BACB-F5FC9CDDA475}
 		{8E160573-53AD-4F08-98CB-ADB235C43B51} = {42D7EA7A-D561-4098-BACB-F5FC9CDDA475}
+		{AFF18B6C-D8C4-47B4-852C-EAC544F4F777} = {020E2A2D-FFCA-4076-A327-935E8646C9F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B39144E8-1E19-479C-A65F-1EDC9EE6F057}
