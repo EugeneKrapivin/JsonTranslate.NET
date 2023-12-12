@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        sdk: [7.0.x]
+        sdk: [7.0.x, 8.0.x]
       fail-fast: true
       
     runs-on: ${{ matrix.os }}
