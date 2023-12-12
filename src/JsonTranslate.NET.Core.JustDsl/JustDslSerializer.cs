@@ -28,11 +28,8 @@ namespace JsonTranslate.NET.Core.JustDsl
             if (instruction.Bindings?.Any() == true)
             {
                 if (instruction.Config != null) sb.Append(", ");
-#if NETSTANDARD2_1
+
                 sb.AppendJoin(", ", instruction.Bindings.Select(Serialize));
-#else
-                sb.Append(string.Join(", ", instruction.Bindings.Select(Serialize)));
-#endif
 
             }
 

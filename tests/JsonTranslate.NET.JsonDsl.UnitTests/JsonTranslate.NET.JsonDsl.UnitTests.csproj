@@ -17,4 +17,16 @@
 		<ProjectReference Include="..\..\src\JsonTranslate.NET.Core.JsonDsl\JsonTranslate.NET.Core.JsonDsl.csproj" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <PackageReference Update="coverlet.collector">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Update="coverlet.msbuild">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
 </Project>
